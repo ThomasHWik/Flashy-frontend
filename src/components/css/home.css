@@ -1,0 +1,68 @@
+body{
+    background-color: #FAF9F9;
+}
+.container{
+    width: 100%;
+    height: 80%;
+    position: absolute;
+    bottom: 0;
+
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-template-areas:
+    ". . . . ."
+    ". . . . createFlashies"
+    "myFlashies myFlashies favFlashies favFlashies createAdmin"
+    "myFlashies myFlashies favFlashies favFlashies ."
+    "myFlashies myFlashies favFlashies favFlashies ."
+    "myFlashies myFlashies favFlashies favFlashies ."
+    "myFlashies myFlashies favFlashies favFlashies ."
+    "myFlashies myFlashies favFlashies favFlashies ."
+    "myFlashies myFlashies favFlashies favFlashies ."
+    "myFlashies myFlashies favFlashies favFlashies ."
+    "myFlashies myFlashies favFlashies favFlashies ."
+    "myFlashies myFlashies favFlashies favFlashies ."
+    "myFlashies myFlashies favFlashies favFlashies ."
+    "myFlashies myFlashies favFlashies favFlashies ."
+    "myFlashies myFlashies favFlashies favFlashies ."
+    "myFlashies myFlashies favFlashies favFlashies ."
+    "myFlashies myFlashies favFlashies favFlashies ."
+    "myFlashies myFlashies favFlashies favFlashies .";
+}
+
+.myFlashy{
+    grid-area: myFlashies;
+    background-color: #BEE3DB;
+    margin: 20px;
+    border-radius: 20px;
+}
+
+.favFlashy{
+    background-color: #BEE3DB;
+    grid-area: favFlashies;
+    margin: 20px;
+    border-radius: 20px;
+}
+
+.createFlashy{
+    grid-area: createFlashies;
+    background-color: #FFD6BA;
+    border-radius: 5px;
+    height: 75px;
+    text-align: center;
+    padding-top: 15px;
+    font-size: 12px;
+    width: 75%;
+}
+
+.createAdmin{
+    grid-area: createAdmin;
+    background-color: #FFD6BA;
+    border-radius: 5px;
+    height: 75px;
+    text-align: center;
+    padding-top: 15px;
+    font-size: 12px;
+    width: 75%;
+}

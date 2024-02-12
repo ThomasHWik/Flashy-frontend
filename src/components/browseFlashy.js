@@ -1,7 +1,7 @@
 import React from "react";
 import "./css/browseFlashy.css";
 
-function BrowseFlashy(props) {
+function BrowseFlashy() {
     return (
         <div>
             <h1>B</h1>
