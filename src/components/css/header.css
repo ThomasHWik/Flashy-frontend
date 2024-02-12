@@ -1,0 +1,12 @@
+.header {
+    background-color: #89b0ae;
+    padding: 20px;
+    text-align: center;
+    font-size: 20px;
+    color: #333;
+    border-bottom: 1px solid #bee3db;
+}
+.homeLink {
+    color: #555B6E;
+    text-decoration: none;
+}
