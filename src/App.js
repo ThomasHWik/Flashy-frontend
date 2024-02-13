@@ -4,6 +4,8 @@ import BrowseFlashy from './components/browseFlashy';
 import Profile from './components/profile';
 import Header from './components/header';
 import Home from './components/home';
+import CreateFlashy from './components/createFlashy';
+import CreateAdmin from './components/createAdmin';
 
 function App() {
   return (
@@ -25,7 +27,7 @@ function App() {
           <Route path="/home" element={
             <>
               <Header header="Flashy!"/>
-              <Profile />
+              <Home />
             </>
           } />
           <Route path="*" element={
@@ -34,20 +36,19 @@ function App() {
               <Home />
             </>
           } />
+          <Route path="/createFlashy" element={
+            <>
+              <Header header="Create Flashy"/>
+              <CreateFlashy />
+            </>
+          } />
+          <Route path="/createAdmin" element={
+            <>
+              <Header header="Create Admin"/>
+              <CreateAdmin />
+            </>
+          } />
         </Routes>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/browseFlashy">Browse Flashy</Link>
-            </li>
-            <li>
-              <Link to="/profile">Profile</Link>
-            </li>
-            <li>
-              <Link to="/home">Flashy!</Link>
-            </li>
-          </ul>
-        </nav>
       </div>
     </Router>
   );
