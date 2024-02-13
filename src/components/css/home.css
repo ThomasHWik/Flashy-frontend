@@ -54,6 +54,8 @@ body{
     padding-top: 15px;
     font-size: 12px;
     width: 75%;
+    color: #555B6E;
+    text-decoration: none;
 }
 
 .createAdmin{
@@ -65,4 +67,6 @@ body{
     padding-top: 15px;
     font-size: 12px;
     width: 75%;
+    color: #555B6E;
+    text-decoration: none;
 }
