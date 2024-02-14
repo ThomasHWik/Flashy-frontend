@@ -1,11 +1,13 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import BrowseFlashy from './components/browseFlashy';
 import Profile from './components/profile';
 import Header from './components/header';
 import Home from './components/home';
 import CreateFlashy from './components/createFlashy';
 import CreateAdmin from './components/createAdmin';
+import Login from './components/login';
+import CreateUser from './components/createUser';
 
 function App() {
   return (
@@ -32,8 +34,7 @@ function App() {
           } />
           <Route path="*" element={
             <>
-              <Header header="Flashy!"/>
-              <Home />
+              <Login />
             </>
           } />
           <Route path="/createFlashy" element={
@@ -46,6 +47,11 @@ function App() {
             <>
               <Header header="Create Admin"/>
               <CreateAdmin />
+            </>
+          } />
+          <Route path="/createUser" element={
+            <>
+              <CreateUser />
             </>
           } />
         </Routes>

@@ -9,6 +9,9 @@ function Login() {
             <p>Username: <input type="text"></input></p>
             <p>Password: <input type="text"></input></p>
             <button>Log in</button>
+            <a href="/createUser">
+                <button>Not user yet?</button>
+            </a>
         </div>
     )
 }
