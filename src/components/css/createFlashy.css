@@ -1,12 +1,36 @@
 .create{
-    background-color: #FFD6BA;
+    background-color: #faf9f9;
     font-size: 20px;
     align-items: center;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     margin-top: 200;
+
+
+}
+
+.title{
+    font-size: 30px;
+    text-align: center;
+
 }
 
 .movetext{
-    margin-left: 50px;
+    margin-left: 10%;
+    align-items: center;
+}
 
+.public{
+    margin-left: 50px;
+    align-items: center;
+}
+
+.button{
+    margin-left: 64%;
+    align-items: center;
+}
+
+.textboxes{
+    align-items: center;
+    margin-left: 20%;
+    background-color: #bee3db;
 }
