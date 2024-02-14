@@ -1,13 +1,27 @@
-.header {
-    background-color: #89b0ae;
-    padding: 20px;
-    text-align: center;
+.create{
+    background-color: #FFD6BA;
     font-size: 20px;
-    color: #333;
-    border-bottom: 1px solid #bee3db;
-    height: 30%;
+    align-items: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin-top: 200;
 }
-.homeLink {
-    color: #555B6E;
-    text-decoration: none;
+
+.movetext{
+    margin-left: 50px;
+    align-items: center;
+}
+
+.public{
+    margin-left: 50px;
+    align-items: center;
+}
+
+.button{
+    margin-left: 50px;
+    align-items: center;
+}
+
+.button2{
+    margin-left: 50px;
+    align-items: center;
 }
