@@ -6,8 +6,17 @@
     color: #333;
     border-bottom: 1px solid #bee3db;
     height: 30%;
+    position: relative;
 }
 .homeLink {
     color: #555B6E;
     text-decoration: none;
+}
+.logo {
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+
 }
