@@ -2,6 +2,7 @@ import { Checkbox, ToggleButton } from "@mui/material";
 import React from "react"
 import { useState } from "react"
 import "./css/createFlashy.css"
+import { useTheme } from "@emotion/react";
 
 //fjerne input når kort er lagt inn
 //design?
@@ -17,15 +18,22 @@ function CreateFlashy() {
 
 
 
-    var questions = []
+    const [questions, setQuestions] = useState([]);
     const [questionValue, setInputQuestion] = useState('');
     const [answerValue, setInputAnswer] = useState('');
     const [title, setInputTitle] = useState('');
+    const [isPrivate, setIsPrivate] = useState(0);
+
     function addQ() {
-        questions.push({ question: questionValue, answers: answerValue })
+        setQuestions([...questions,{question:questionValue, answer:answerValue}])
         setInputQuestion();
         console.log(questions)
     }
+
+    const handleIsPrivate = (e) => {
+        setIsPrivate(e.target.value)
+    }
+    ;
     const handleInputTitle = (e) => {
         setInputTitle(e.target.value);
     };
@@ -41,19 +49,22 @@ function CreateFlashy() {
     async function sendFlashcard() {
         const result = await fetch("http://localhost:8080/flashcard/create",
             {
-                method: "POST", mode: "cors", credentials: "same-origin", body: JSON.stringify(
+
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                method: "POST", body: JSON.stringify(
                     { name: title, cards: questions, isprivate: 0 })
             }
         )
-        const status=JSON.parse(result)
-        console.log(status)
+        console.log(result)
     }
     return (
         <div className="create">
             <p className="movetext" ><h2>Title: </h2>
                 <textarea className="textboxes" cols={80} onChange={(e) => handleInputTitle(e)} type="text" ></textarea>
             </p>
-            <h3 className="movetext">Press for public carddeck <Checkbox></Checkbox></h3>
+            <h3 className="movetext">Press for public carddeck <Checkbox onChange={(e)=> handleIsPrivate(e)}></Checkbox></h3>
             <p className="movetext">
                 <h3>Fill in question: </h3>
                 <textarea className="textboxes"  cols={80} onChange={(e) => handleInputQuestion(e)} type="text"></textarea>
