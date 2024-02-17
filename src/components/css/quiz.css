@@ -1,0 +1,63 @@
+.container {
+    position: absolute;
+}
+
+.quizBox {
+    position:relative;
+    top: 50px;
+    width:700px;
+    height:350px;
+    border-radius: 20px;
+    margin: 0 auto;
+    background:#BEE3DB;
+    padding:10px;
+    cursor: pointer;
+}
+
+.infoBox {
+    position:absolute;
+    top:190px;
+    left: 120px;
+    width:180px;
+    height:350px;
+    border-radius: 20px;
+    background:#BEE3DB;
+    padding:10px;
+    text-align: center;
+}
+
+
+.cardText{
+   text-align: center;
+}
+
+.buttonNext {
+    position: absolute;
+    bottom: 8%;
+    right: 25%;
+}
+
+.buttonBack {
+    position: absolute;
+    bottom: 8%;
+    left: 25%;
+}
+
+.buttonLike {
+    position: absolute;
+    bottom: 8%;
+    right: 40%;
+}
+
+.buttonFavourite {
+    position: absolute;
+    bottom: 8%;
+    left: 40%;
+}
+
+.buttonFlag {
+    position: absolute;
+    bottom: 8%;
+    left: 50%;
+    right: 50%;
+}

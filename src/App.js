@@ -8,6 +8,7 @@ import CreateFlashy from './components/createFlashy';
 import CreateAdmin from './components/createAdmin';
 import Login from './components/login';
 import CreateUser from './components/createUser';
+import Quiz from './components/quiz';
 
 function App() {
   return (
@@ -53,6 +54,12 @@ function App() {
             <>
               <CreateUser />
             </>
+          } />
+          <Route path ="/quiz" element ={
+            <>
+              <Header header = "Flash-name"/>
+              <Quiz />
+              </>
           } />
         </Routes>
       </div>
