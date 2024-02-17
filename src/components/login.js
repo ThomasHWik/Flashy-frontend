@@ -33,8 +33,12 @@ function Login() {
         console.log({username: name, password: userPassword})
         console.log(result)
         console.log(result.status)
+        const parsed = await result.json()
+        console.log(parsed)
         if (result.status == 200) {
             localStorage.setItem("flashyUserName", name)
+            localStorage.setItem("flashyToken", parsed.message)
+            localStorage.setItem("flashyIsAdmin", parsed.isadmin)
             window.location.href = "/home"
             
         } else {
