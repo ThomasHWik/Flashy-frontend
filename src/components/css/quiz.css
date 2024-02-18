@@ -34,13 +34,13 @@
 .buttonNext {
     position: absolute;
     bottom: 8%;
-    right: 25%;
+    right: 30%;
 }
 
 .buttonBack {
     position: absolute;
     bottom: 8%;
-    left: 25%;
+    left: 30%;
 }
 
 .buttonLike {
@@ -58,6 +58,11 @@
 .buttonFlag {
     position: absolute;
     bottom: 8%;
-    left: 50%;
-    right: 50%;
+    right: 46%;
+}
+
+.buttonShuffle {
+    position: absolute;
+    bottom: 8%;
+    left: 46%;
 }
