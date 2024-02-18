@@ -13,6 +13,10 @@ function Quiz() {
   const queryParameters = new URLSearchParams(window.location.search);
   const uuid = queryParameters.get("uuid");
 
+  useEffect(() => {
+    console.log("Cards in deck:", deck.cards);
+  }, [deck.cards]); // logs changes to card deck (such as loading and shuffling)
+
   console.log(uuid);
   async function fetchFlashyInfo() {
     const result = await fetch("http://localhost:8080/flashcard/id/" + uuid, {
@@ -26,6 +30,21 @@ function Quiz() {
     const decks = await result.json();
     console.log(decks);
     setDeck(decks);
+  }
+
+  // shuffle the flashcard deck
+  function shuffleDeck() {
+    setDeck((currentDeck) => {
+      let shuffledDeck = [...deck.cards]; // copy of the cards array
+      for (let i = shuffledDeck.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledDeck[i], shuffledDeck[j]] = [shuffledDeck[j], shuffledDeck[i]]; // swap cards
+      }
+      return { ...currentDeck, cards: shuffledDeck }; // return a new deck with the shuffled cards
+    });
+
+    setCurrentCardIndex(0); // start the quiz at the first card
+    setShowAnswer(0); // show the question side of the flashcard
   }
 
   function nextCard() {
@@ -104,6 +123,12 @@ function Quiz() {
 
         <p className="buttonFlag">
           <button style={buttonEmojiStyle}>❗</button>
+        </p>
+
+        <p className="buttonShuffle">
+          <button style={buttonEmojiStyle} onClick={() => shuffleDeck()}>
+            🔃
+          </button>
         </p>
       </div>
     </div>
