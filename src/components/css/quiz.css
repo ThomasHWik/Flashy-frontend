@@ -24,6 +24,25 @@
     background:#BEE3DB;
     padding:10px;
     text-align: center;
+ 
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 0 2px 0 rgba(0,0,0,0.2);
+    justify-content: start;
+}
+
+.deleteeditcontainer {
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+.deleteeditcontainer button {
+    padding: 5px;
+
 }
 
 

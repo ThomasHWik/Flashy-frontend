@@ -10,6 +10,8 @@ function Quiz() {
   const [showAnswer, setShowAnswer] = useState(0);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
 
+  const [loadingDelete, setLoadingDelete] = useState(false);
+
   const queryParameters = new URLSearchParams(window.location.search);
   const uuid = queryParameters.get("uuid");
 
@@ -17,7 +19,7 @@ function Quiz() {
     console.log("Cards in deck:", deck.cards);
   }, [deck.cards]); // logs changes to card deck (such as loading and shuffling)
 
-  console.log(uuid);
+
   async function fetchFlashyInfo() {
     const result = await fetch("http://localhost:8080/flashcard/id/" + uuid, {
       headers: {
@@ -60,6 +62,29 @@ function Quiz() {
     setShowAnswer(0);
   }
 
+  function editDeck() {
+      window.location.href = "/edit?uuid=" + uuid;
+  }
+
+  async function deleteDeck() {
+
+      setLoadingDelete(true);
+      const result = await fetch("http://localhost:8080/flashcard/delete/" + uuid, {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + localStorage.getItem("flashyToken"),
+        },
+        method: "DELETE",
+      });
+    
+      console.log(result);
+    }
+  
+
+  function checkAuthorization(username) {
+    return localStorage.getItem("flashyUserName") === deck.username || localStorage.getItem("flahyisadmin") === 1;
+  }
+
   useEffect(() => {
     fetchFlashyInfo();
   }, []);
@@ -87,22 +112,25 @@ function Quiz() {
           <p className="cardText">
             {showAnswer
               ? deck.cards[currentCardIndex].answer
-              : deck.cards[currentCardIndex].question}
+              : deck.cards[currentCardIndex].question
+              }
           </p>
         </div>
 
         <div className="infoBox">
           <h3>{deck.name}</h3>
-          <p>Infobox</p>
-          <p>Made by:</p>
-          <p>Likes:</p>
-          <p>Comments:</p>
+          <p>Made by: <span style={{fontWeight:"bold"}}>{deck.username}</span></p>
+          <p>Cards: <span style={{fontWeight:"bold"}}>{deck.cards.length}</span></p>
+          <div className="deleteeditcontainer">
+            { checkAuthorization() ? <button onClick={() => editDeck()}>Edit</button> : <></> }
+            <button onClick={() => deleteDeck()}>Delete</button>
+          </div>
         </div>
       </div>
 
       <div className="divBtn">
         <p className="buttonNext">
-          <button style={buttonEmojiStyle} onClick={() => nextCard()}>
+          <button disabled={loadingDelete} style={buttonEmojiStyle} onClick={() => nextCard()}>
             👉
           </button>
         </p>
