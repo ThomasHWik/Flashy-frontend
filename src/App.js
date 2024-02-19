@@ -9,6 +9,7 @@ import CreateAdmin from './components/createAdmin';
 import Login from './components/login';
 import CreateUser from './components/createUser';
 import Quiz from './components/quiz';
+import Edit from './components/edit';
 
 function App() {
   return (
@@ -59,6 +60,12 @@ function App() {
             <>
               <Header header = "Flash-name"/>
               <Quiz />
+              </>
+          } />
+          <Route path ="/edit" element ={
+            <>
+              <Header header = "Flash-name"/>
+              <Edit />
               </>
           } />
         </Routes>
