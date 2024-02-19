@@ -24,7 +24,7 @@ function Quiz() {
     const result = await fetch("http://localhost:8080/flashcard/id/" + uuid, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: "bearer " + localStorage.getItem("flashyToken"),
+        "Authorization": "bearer " + localStorage.getItem("flashyToken"),
       },
       method: "GET",
     });
@@ -63,26 +63,35 @@ function Quiz() {
   }
 
   function editDeck() {
-      window.location.href = "/edit?uuid=" + uuid;
+    window.location.href = "/edit?uuid=" + uuid;
   }
 
   async function deleteDeck() {
 
-      setLoadingDelete(true);
-      const result = await fetch("http://localhost:8080/flashcard/delete/" + uuid, {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + localStorage.getItem("flashyToken"),
-        },
-        method: "DELETE",
-      });
-    
-      console.log(result);
+    setLoadingDelete(true);
+    const result = await fetch("http://localhost:8080/flashcard/delete/" + uuid, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "bearer " + localStorage.getItem("flashyToken"),
+      },
+      method: "DELETE",
+    });
+
+
+    if (result.status === 200) {
+      window.location.href = "/home";
+    } else if (result.status === 403) {
+      alert("You are not authorized to delete this deck.");
+    } else {
+      alert("An error occurred. Please try again.");
     }
-  
+
+
+  }
+
 
   function checkAuthorization(username) {
-    return localStorage.getItem("flashyUserName") === deck.username || localStorage.getItem("flahyisadmin") === 1;
+    return localStorage.getItem("flashyUserName") === deck.username || localStorage.getItem("flashyIsAdmin") === "1";
   }
 
   useEffect(() => {
@@ -108,24 +117,28 @@ function Quiz() {
   return (
     <div>
       <div classname="container">
-        <div className="quizBox" onClick={() => setShowAnswer(!showAnswer)}>
-          <p className="cardText">
-            {showAnswer
-              ? deck.cards[currentCardIndex].answer
-              : deck.cards[currentCardIndex].question
-              }
-          </p>
-        </div>
+        <div className="gamecontainer">
+          <div className="infoBox">
+            <h3>{deck.name}</h3>
+            <p>Made by: <span style={{ fontWeight: "bold" }}>{deck.username}</span></p>
+            <p>Cards: <span style={{ fontWeight: "bold" }}>{deck.cards.length}</span></p>
+            <div className="deleteeditcontainer">
+              <button onClick={() => editDeck()} className="button">Edit</button>
+              {checkAuthorization() ? <button className="button" onClick={() => deleteDeck()}>Delete</button> : <></>}
 
-        <div className="infoBox">
-          <h3>{deck.name}</h3>
-          <p>Made by: <span style={{fontWeight:"bold"}}>{deck.username}</span></p>
-          <p>Cards: <span style={{fontWeight:"bold"}}>{deck.cards.length}</span></p>
-          <div className="deleteeditcontainer">
-            { checkAuthorization() ? <button onClick={() => editDeck()}>Edit</button> : <></> }
-            <button onClick={() => deleteDeck()}>Delete</button>
+            </div>
+          </div>
+          <div className="quizBox" onClick={() => setShowAnswer(!showAnswer)}>
+            <p className="cardText">
+              <span>#{currentCardIndex+1}</span>
+              {showAnswer
+                ? deck.cards[currentCardIndex].answer
+                : deck.cards[currentCardIndex].question
+              }
+            </p>
           </div>
         </div>
+
       </div>
 
       <div className="divBtn">
