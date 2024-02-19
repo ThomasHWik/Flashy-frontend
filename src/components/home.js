@@ -61,9 +61,11 @@ function Home() {
           <h1>My Flashies</h1>
           <div className="myFlashy">
             {userDecks.map((v) => (
-              <div onClick={() => togglePopup()}>
-                <a href={"/quiz?uuid=" + v.uuid}>{v.name}</a>
-              </div>
+              <a href={"/quiz?uuid=" + v.uuid}>
+                <div onClick={() => togglePopup()} className="myDeckDiv">
+                  {v.name}
+                </div>
+              </a>
             ))}
           </div>
         </div>
