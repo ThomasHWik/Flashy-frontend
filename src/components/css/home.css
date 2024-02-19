@@ -1,72 +1,34 @@
-body{
-    background-color: #FAF9F9;
-}
-.container{
+.body{
+    background-color: #555B6E;
     width: 100%;
-    height: 80%;
-    position: absolute;
-    bottom: 0;
-
-    display: grid;
-    grid-template-columns: auto;
-    grid-template-rows: auto;
-    grid-template-areas:
-    ". . . . ."
-    ". . . . createFlashies"
-    "myFlashies myFlashies favFlashies favFlashies createAdmin"
-    "myFlashies myFlashies favFlashies favFlashies ."
-    "myFlashies myFlashies favFlashies favFlashies ."
-    "myFlashies myFlashies favFlashies favFlashies ."
-    "myFlashies myFlashies favFlashies favFlashies ."
-    "myFlashies myFlashies favFlashies favFlashies ."
-    "myFlashies myFlashies favFlashies favFlashies ."
-    "myFlashies myFlashies favFlashies favFlashies ."
-    "myFlashies myFlashies favFlashies favFlashies ."
-    "myFlashies myFlashies favFlashies favFlashies ."
-    "myFlashies myFlashies favFlashies favFlashies ."
-    "myFlashies myFlashies favFlashies favFlashies ."
-    "myFlashies myFlashies favFlashies favFlashies ."
-    "myFlashies myFlashies favFlashies favFlashies ."
-    "myFlashies myFlashies favFlashies favFlashies ."
-    "myFlashies myFlashies favFlashies favFlashies .";
+    height: 100vh;
+    display: flex;
 }
 
-.myFlashy{
-    grid-area: myFlashies;
+.container{
+    width: 90%;
+    height: 100%;
+    right: 0;
+    display: flex;
+}
+
+.overview{
+    flex: 1;
+    margin: 20px;
+    border-radius: 20px;
+    height: 60%;
+}
+
+.overview h1{
+    text-align: center;
+    margin-top: 20px;
+    color: #FAF9F9;
+}
+
+.myFlashy, .favFlashy{
+    flex: 1;
     background-color: #BEE3DB;
     margin: 20px;
     border-radius: 20px;
-}
-
-.favFlashy{
-    background-color: #BEE3DB;
-    grid-area: favFlashies;
-    margin: 20px;
-    border-radius: 20px;
-}
-
-.createFlashy{
-    grid-area: createFlashies;
-    background-color: #FFD6BA;
-    border-radius: 5px;
-    height: 75px;
-    text-align: center;
-    padding-top: 15px;
-    font-size: 12px;
-    width: 75%;
-    color: #555B6E;
-    text-decoration: none;
-}
-
-.createAdmin{
-    grid-area: createAdmin;
-    background-color: #FFD6BA;
-    border-radius: 5px;
-    height: 75px;
-    text-align: center;
-    padding-top: 15px;
-    font-size: 12px;
-    width: 75%;
-    color: #555B6E;
-    text-decoration: none;
+    height: 60%;
 }

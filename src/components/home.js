@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./css/home.css";
+import Navbar from "./navbar";
 
 function Home() {
   const [userDecks, setUserDecks] = useState([]);
@@ -53,34 +54,29 @@ function Home() {
   }, []);
 
   return (
-    <div>
+    <div className="body">
+      <Navbar />
       <div className="container" href="createFlashy">
-        <h1>My Flashies</h1>
-        <div className="myFlashy">
-          {userDecks.map((v) => (
-            <div onClick={() => togglePopup()}>
-              <a href={"/quiz?uuid=" + v.uuid}>{v.name}</a>
-            </div>
-          ))}
-        </div>
-        <h1>My favorites</h1>
-        <div className="favFlashy">
-          {favoriteDecks.map((v) => (
-            <div onClick={() => togglePopup()}>
-              <a href={"/quiz?uuid=" + v.uuid}>{v.name}</a>
-            </div>
-          ))}
-        </div>
-        <a className="createFlashy" href="createFlashy">
-          <div>
-            <h1>Create New Flashy!</h1>
+        <div className="overview">
+          <h1>My Flashies</h1>
+          <div className="myFlashy">
+            {userDecks.map((v) => (
+              <div onClick={() => togglePopup()}>
+                <a href={"/quiz?uuid=" + v.uuid}>{v.name}</a>
+              </div>
+            ))}
           </div>
-        </a>
-        <a className="createAdmin" href="createAdmin">
-          <div>
-            <h1>Create New Admin!</h1>
+        </div>
+        <div className="overview">
+          <h1>My Favorites</h1>
+          <div className="favFlashy">
+            {favoriteDecks.map((v) => (
+              <div onClick={() => togglePopup()}>
+                <a href={"/quiz?uuid=" + v.uuid}>{v.name}</a>
+              </div>
+            ))}
           </div>
-        </a>
+        </div>
       </div>
     </div>
   );
