@@ -56,7 +56,7 @@ function Home() {
   return (
     <div className="body">
       <Navbar />
-      <div className="container" href="createFlashy">
+      <div className="containerHome" >
         <div className="overview">
           <h1>My Flashies</h1>
           <div className="myFlashy">

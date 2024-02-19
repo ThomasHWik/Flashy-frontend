@@ -1,4 +1,4 @@
-.container {
+.containerLogin {
     background-color: #555B6E;
     position: absolute;
     width: 100%;
@@ -9,6 +9,7 @@
 .login {
     position: relative;
     margin: auto;
+    width: 40%;
 
     background-color: #89B0AE;
     padding: 20px;
@@ -20,7 +21,7 @@
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-.create{
+.btnLogin, .btnNewUser {
     --border: 4px;
     --slant: 0.5em;
     --color: #555B6E;
@@ -37,7 +38,7 @@
     box-shadow:
     0 0 0 200px inset var(--s,#0000),
     0 0 0 var(--border) inset var(--color);
-    clip-path: 
+    clip-path:
         polygon(0 0, calc(100% - var(--slant)) 0, 100% var(--slant),
             100% 100%, var(--slant) 100%,0 calc(100% - var(--slant))
             );
@@ -58,4 +59,10 @@ button:active{
 button:active {
     --s: #0005;
     transition: none;
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
 }

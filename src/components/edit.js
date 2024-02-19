@@ -42,7 +42,7 @@ function Edit() {
                     <textarea rows = {10} cols={52} placeholder='Answer' onChange={(e) => updateAnswer(e)}/>
                 </div>
             </div>
-        </div>     
+        </div>
         )
     }
 
@@ -72,10 +72,10 @@ function Edit() {
         )
         const status=JSON.parse(result)
         console.log(status)
-    } 
+    }
 
     return (
-        <div className='container'>
+        <div className='containerEdit'>
             <div>
                 <h1><input onChange={(e) => updateName(e)} placeholder = "Name" style ={{width: "300px", height: "30px", border: "0px", background:"#BEE3DB", borderRadius: "5px"}}></input></h1>
                 <h1><button className="doneButton" onClick={() => sendFlashcard()}>Save Flashy</button></h1>
