@@ -54,21 +54,21 @@ function Login() {
     }
 
     return (
-        <div className = "container">
+        <div className = "containerLogin">
 
             <div className="login">
                 <h1>Flashy login</h1>
                 <p>Username: <input onChange={(e)=>handleUserName (e)} type="text"></input></p>
                 <p>Password: <input onChange={(e)=>handlePassword(e)} type="text"></input></p>
-                <button className="create"  onClick={() => sendLogin()}>Log in</button>
+                <button className="btnLogin"  onClick={() => sendLogin()}>Log in</button>
                 <p>{message}</p>
                 <a href="/createUser">
-                <button className="create">Not user yet?</button>
+                <button className="btnNewUser">Not user yet?</button>
                 </a>
             </div>
 
         </div>
-        
+
     )
 }
 
