@@ -15,6 +15,14 @@ function Login() {
         setUserPassword(e.target.value)
     }
 
+    const buttonStyle = {
+        color: "#FAF9F9",
+        backgroundColor: '#555B6E',
+        fontSize: '20px',
+        fontFamily: 'Lucida Sans',
+        cursor: "pointer"
+    };
+
     // const handleMessage = (e) => {
     //     setMessage(e.target.value)
     // }
@@ -35,7 +43,7 @@ function Login() {
         console.log(result.status)
         const parsed = await result.json()
         console.log(parsed)
-        if (result.status == 200) {
+        if (result.status === 200) {
             localStorage.setItem("flashyUserName", name)
             localStorage.setItem("flashyToken", parsed.message)
             localStorage.setItem("flashyIsAdmin", parsed.isadmin)
@@ -47,16 +55,21 @@ function Login() {
     }
 
     return (
-        <div className="login">
-            <h1>Flashy login</h1>
-            <p>Username: <input onChange={(e)=>handleUserName (e)} type="text"></input></p>
-            <p>Password: <input onChange={(e)=>handlePassword(e)} type="text"></input></p>
-            <button onClick={() => sendLogin()}>Log in</button>
-            <p>{message}</p>
-            <a href="/createUser">
-                <button>Not user yet?</button>
-            </a>
+        <div className = "container">
+
+            <div className="login">
+                <h1>Flashy login</h1>
+                <p>Username: <input onChange={(e)=>handleUserName (e)} type="text"></input></p>
+                <p>Password: <input onChange={(e)=>handlePassword(e)} type="text"></input></p>
+                <button className="create"  onClick={() => sendLogin()}>Log in</button>
+                <p>{message}</p>
+                <a href="/createUser">
+                <button className="create">Not user yet?</button>
+                </a>
+            </div>
+
         </div>
+        
     )
 }
 
