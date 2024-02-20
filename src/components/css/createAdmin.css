@@ -1,0 +1,91 @@
+/* Base styles to maintain consistency across admin pages */
+.app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FAF9F9; /* Updated to specified white color */
+    min-height: 100vh;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  
+  .back-button {
+    align-self: flex-start;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+    color: #333;
+    border: 2px solid #89B0AE; /* Updated to specified color */
+  }
+  
+  /* Admin Panel Styles */
+  .admin-panel {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .current-admin-users,
+  .create-new-admin {
+    background-color: #BEE3DB;
+    border: 2px solid #89B0AE; /* Updated border color */
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px;
+  }
+  
+  .current-admin-users h2,
+  .create-new-admin h2 {
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Current Admin Users List */
+  .current-admin-users ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .current-admin-users li {
+    background-color: #ffffff;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
+    color: #333;
+  }
+  
+  .current-admin-users button {
+    cursor: pointer;
+    padding: 5px 10px;
+    background-color: #f5fff5;
+    border: none;
+    border-radius: 3px;
+    font-size: 18px;
+    color: #333;
+    margin-left: 10px;
+  }
+  
+  /* Create New Admin Form Styles */
+  .create-new-admin {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+  
+  .create-new-admin label {
+    margin-bottom: 5px;
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .create-new-admin input {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 20px;
+  }
