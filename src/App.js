@@ -1,11 +1,11 @@
+import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import BrowseFlashy from './components/browseFlashy';
 import Profile from './components/profile';
 import Header from './components/header';
 import Home from './components/home';
 import CreateFlashy from './components/createFlashy';
-import CreateAdmin from './components/createAdmin';
 import Login from './components/login';
 import CreateUser from './components/createUser';
 import Quiz from './components/quiz';
@@ -34,7 +34,7 @@ function App() {
               <Home />
             </>
           } />
-          <Route path="*" element={
+          <Route path="/" element={
             <>
               <Login />
             </>
