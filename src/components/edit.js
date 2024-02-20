@@ -177,20 +177,23 @@ const Box = (props) => {
     }, [props.question, props.answer]);
 
 
-    function update() {
+    function update(question, answer) {
         props.updateFunc(question, answer, props.index);
     }
 
     function updateQuestion(e) {
+    
         setQuestion(e.target.value);
-        update();
+        update(e.target.value, answer);
     }
 
     function updateAnswer(e) {
-        console.log(e);
+ 
         setAnswer(e.target.value);
-        update();
+        update(question, e.target.value);
     }
+
+
 
 
     return (
