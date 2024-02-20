@@ -1,92 +1,209 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './css/edit.css'
+import { Checkbox, ToggleButton } from "@mui/material";
+import Navbar from './navbar'
 
 function Edit() {
 
-    const [questions, setBoxCount] = React.useState([]);
+    const [questions, setQuestions] = React.useState([]);
 
-    function setCardValue (question, answer, index) {
+    const [initialDeck, setInitialDeck] = React.useState({
+        name: "Hovedstader",
+        cards: [],
+        isprivate: 0,
+        uuid: "wefkweofp"
+    });
+
+    const [disableConfirm, setDisableConfirm] = React.useState(false);
+
+    const [username, setUsername] = React.useState("");
+
+    const [isPrivate, setIsPrivate] = React.useState(false);
+
+
+    const uuid = new URLSearchParams(window.location.search).get("uuid");
+
+    function handleIsPrivate(e) {
+        setIsPrivate(e.target.checked);
+
+    }
+
+    function setCardValue(question, answer, index) {
         let temp = questions;
         temp[index] = [question, answer];
-        setBoxCount(temp);
+        setQuestions(temp);
         console.log(temp);
     }
 
-    const Box = (props) => {
-        const [question, setQuestion] = React.useState('');
-        const [answer, setAnswer] = React.useState('');
-        function update() {
-            props.updateFunc(question, answer, props.index);
-        }
-
-        function updateQuestion(e) {
-            setQuestion(e.target.value);
-            update();
-        }
-
-        function updateAnswer(e) {
-            setAnswer(e.target.value);
-            update();
-        }
-
-        return (
-        <div>
-            <div className = "box">
-                <button className = "create" onClick={() => props.deleteCard(props.index)}>Delete</button>
-                <div className='question'>
-                    <textarea  rows = {10} cols={52} placeholder='Question' onChange={(e) => updateQuestion(e)}/>
-                </div>
-                <div className='answer'>
-                    <textarea rows = {10} cols={52} placeholder='Answer' onChange={(e) => updateAnswer(e)}/>
-                </div>
-            </div>
-        </div>     
-        )
+    function getValues(index) {
+        return questions[index];
     }
 
     function addCard() {
         console.log(questions)
-        setBoxCount([...questions, []]);
+        setQuestions([...questions, []]);
     }
 
-    function deleteCard(index){
-        let arr = [...questions];
-        arr.splice(index, 1);
-        setBoxCount(arr)
+    function deleteCard(index) {
+        let temp = [...questions];
+        temp.splice(index, 1);
+        setQuestions(temp);
     }
 
     const [name, setName] = React.useState([]);
 
-    function updateName(e){
+    function checkAuthorization(deckusername) {
+        return localStorage.getItem("flashyIsAdmin") === "1" || localStorage.getItem("flashyUserName") === deckusername;
+    }
+
+    function updateName(e) {
         setName(e.target.value);
     }
 
-    function sendFlashcard() {
+    async function fetchFlashyInfo() {
+        const result = await fetch("http://localhost:8080/flashcard/id/" + uuid, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "bearer " + localStorage.getItem("flashyToken"),
+            },
+            method: "GET",
+        });
+        console.log(result);
 
-        const result = fetch("http://localhost:8080/flashcard/edit",
-            {   headers: {"Authorization":"Bearer "+localStorage.getItem("flashyToken")},
-                method: "PUT", body: JSON.stringify({ name: name, cards: questions, isprivate: 0, uuid: new URLSearchParams(window.location.search).get("uuid")})
+        if (result.status === 200) {
+
+            const deck = await result.json();
+            setName(deck.name);
+            let cards = [];
+            deck.cards.forEach((card) => {
+                cards.push([card.question, card.answer]);
+            });
+            setQuestions(cards);
+            setInitialDeck(deck);
+
+        } else {
+            alert("Failed to fetch flashcard / You are not authorized to edit this flashcard.");
+        }
+
+    }
+
+    async function confirmEdit() {
+        setDisableConfirm(true);
+        let cards = [];
+            questions.forEach((card) => {
+                cards.push({ question: card[0], answer: card[1]});
+            });
+
+        const result = await fetch("http://localhost:8080/flashcard/edit",
+            {
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("flashyToken"),
+                    "Content-Type": "application/json"
+                },
+                method: "PUT", body: JSON.stringify({ name: name, cards: cards, isprivate: isPrivate ? 1 : 0, uuid: initialDeck.uuid })
             }
         )
-        const status=JSON.parse(result)
-        console.log(status)
-    } 
+        const status = result.status;
+        console.log(result)
+
+        if (status === 200) {
+            window.location.href = "/quiz?uuid=" + initialDeck.uuid;
+        } else if (status === 403) {
+            alert("You are not authorized to edit this flashcard.");
+        }
+        else {
+            alert("An error occurred. Please try again.");
+        }
+        setDisableConfirm(false);
+    }
+
+    useEffect(() => {
+        fetchFlashyInfo();
+    }, []);
+    return (
+        <div className='editcontainer'>
+            <Navbar />
+            <div className='editmaincontainer'>
+                <p>Edit Flashcard - <span style={{ fontWeight: "bold" }}>{initialDeck.name}</span></p>
+                <span>Made by: {initialDeck.username}</span>
+                <div className='editsectioncontainer'>
+                    <p>Information</p>
+                    <div className='editheadercontainer'>
+                        <div>
+                            <p>Title</p>
+                            <input onChange={(e) => updateName(e)} placeholder='Title' value={name}></input>
+                        </div>
+                        {checkAuthorization(initialDeck.username) ?
+                            <div>
+                                <p>Set private</p>
+                                <Checkbox onChange={(e) => { handleIsPrivate(e) }} value={initialDeck.isprivate}></Checkbox>
+                            </div>
+                            : null
+                        }
+
+                    </div>
+                </div>
+                {/*  <div className='editlabelscontainer'>
+                    <h1 className='h1Q'>Question</h1>
+                    <h1 className='h1A'>Answer</h1>
+                </div>
+    */}
+                <div className='editsectioncontainer'>
+                    <p>Flashcards</p>
+                    <div className='editboxescontainer'>
+                        {questions.map((i, v) => { return <Box key={v} question={i[0]} getValues={getValues} answer={i[1]} updateFunc={setCardValue} index={v} deleteCard={deleteCard} /> })}
+                        <div className='editaddCard' onClick={addCard}>
+                            <h3 className="editaddcardbtn">+</h3>
+                        </div>
+                    </div>
+
+                </div>
+                <div className='confirmeditcontainer'>
+                    <button disabled={disableConfirm} onClick={() => confirmEdit()}>Confirm edit</button>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+const Box = (props) => {
+    const [question, setQuestion] = React.useState(props.question || '');
+    const [answer, setAnswer] = React.useState(props.answer || '');
+
+
+    useEffect(() => {
+        setQuestion(props.question || '');
+        setAnswer(props.answer || '');
+    }, [props.question, props.answer]);
+
+
+    function update() {
+        props.updateFunc(question, answer, props.index);
+    }
+
+    function updateQuestion(e) {
+        setQuestion(e.target.value);
+        update();
+    }
+
+    function updateAnswer(e) {
+        console.log(e);
+        setAnswer(e.target.value);
+        update();
+    }
+
 
     return (
-        <div className='container'>
-            <div>
-                <h1><input onChange={(e) => updateName(e)} placeholder = "Name" style ={{width: "300px", height: "30px", border: "0px", background:"#BEE3DB", borderRadius: "5px"}}></input></h1>
-                <h1><button className="doneButton" onClick={() => sendFlashcard()}>Save Flashy</button></h1>
-            </div>
-            <div className='editHeader'>
-                <h1 className='h1Q'>Question</h1>
-                <h1 className='h1A'>Answer</h1>
-            </div>
-            <div className='boxDiv'>
-                {questions.map((i, v) => { return <Box updateFunc = {setCardValue} index = {v} deleteCard={deleteCard} /> })}
-            </div>
-            <div className='addCard' onClick={addCard}>
-                <h1>+</h1>
+        <div>
+            <div className="box">
+                <button className="editdeletecardbtn" onClick={() => props.deleteCard(props.index)}>Delete</button>
+                <div className='question'>
+                    <textarea rows={10} placeholder='Question' onInput={(e) => updateQuestion(e)} value={question} />
+                </div>
+                <div className='editverticalline'></div>
+                <div className='answer'>
+                    <textarea rows={10} placeholder='Answer' onInput={(e) => updateAnswer(e)} value={answer} />
+                </div>
             </div>
         </div>
     )
