@@ -133,9 +133,9 @@ function Quiz() {
           <div className="quizBox" onClick={() => setShowAnswer(!showAnswer)}>
             <p className="cardText">
               <span>#{currentCardIndex+1}</span>
-              {showAnswer
+              {deck.cards.length > 0 ? showAnswer
                 ? deck.cards[currentCardIndex].answer
-                : deck.cards[currentCardIndex].question
+                : deck.cards[currentCardIndex].question : "This deck is empty"
               }
             </p>
           </div>
