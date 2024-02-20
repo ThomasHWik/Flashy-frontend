@@ -9,6 +9,7 @@
     height: 90%;
     right: 0;
     display: flex;
+    position: absolute;
 }
 
 .overview{

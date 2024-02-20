@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./css/quiz.css";
+import Navbar from "./navbar";
 
 function Quiz() {
   const [deck, setDeck] = useState({
@@ -110,13 +111,14 @@ function Quiz() {
     padding: 0,
     border: "#FAF9F9",
     fontSize: "30px",
-    background: "#FAF9F9",
+    background: "#555B6E",
     cursor: "pointer",
   };
 
   return (
-    <div>
-      <div classname="container">
+    <div className="quizBody">
+      <Navbar />
+      <div className="containerQuiz">
         <div className="gamecontainer">
           <div className="infoBox">
             <h3>{deck.name}</h3>
@@ -139,38 +141,39 @@ function Quiz() {
           </div>
         </div>
 
-      </div>
 
-      <div className="divBtn">
-        <p className="buttonNext">
-          <button disabled={loadingDelete} style={buttonEmojiStyle} onClick={() => nextCard()}>
-            👉
-          </button>
-        </p>
+        <div className="divBtn">
+          <p className="buttonBack">
+            <button style={buttonEmojiStyle} onClick={() => previousCard()}>
+              👈
+            </button>
+          </p>
 
-        <p className="buttonBack">
-          <button style={buttonEmojiStyle} onClick={() => previousCard()}>
-            👈
-          </button>
-        </p>
+          <p className="buttonFavourite">
+            <button style={buttonEmojiStyle}>🌟</button>
+          </p>
 
-        <p className="buttonLike">
-          <button style={buttonEmojiStyle}>👍</button>
-        </p>
+          <p className="buttonShuffle">
+            <button style={buttonEmojiStyle} onClick={() => shuffleDeck()}>
+              🔃
+            </button>
+          </p>
 
-        <p className="buttonFavourite">
-          <button style={buttonEmojiStyle}>🌟</button>
-        </p>
+          <p className="buttonFlag">
+            <button style={buttonEmojiStyle}>❗</button>
+          </p>
 
-        <p className="buttonFlag">
-          <button style={buttonEmojiStyle}>❗</button>
-        </p>
+          <p className="buttonLike">
+            <button style={buttonEmojiStyle}>👍</button>
+          </p>
 
-        <p className="buttonShuffle">
-          <button style={buttonEmojiStyle} onClick={() => shuffleDeck()}>
-            🔃
-          </button>
-        </p>
+          <p className="buttonNext">
+            <button disabled={loadingDelete} style={buttonEmojiStyle} onClick={() => nextCard()}>
+              👉
+            </button>
+          </p>
+
+        </div>
       </div>
     </div>
   );

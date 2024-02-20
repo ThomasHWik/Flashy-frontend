@@ -1,53 +1,58 @@
 /* Base styles to maintain consistency across admin pages */
+.adminBody{
+    display: flex;
+    width: 100%;
+    background-color: #555B6E;
+}
+
 .app {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #FAF9F9; /* Updated to specified white color */
     min-height: 100vh;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  }
-  
-  .back-button {
+}
+
+.back-button {
     align-self: flex-start;
     padding: 10px;
     margin: 10px;
     cursor: pointer;
     color: #333;
     border: 2px solid #89B0AE; /* Updated to specified color */
-  }
-  
+}
+
   /* Admin Panel Styles */
-  .admin-panel {
+.admin-panel {
     display: flex;
     justify-content: space-around;
     width: 100%;
     margin-top: 20px;
-  }
-  
-  .current-admin-users,
-  .create-new-admin {
+}
+
+.current-admin-users, .create-new-admin {
     background-color: #BEE3DB;
     border: 2px solid #89B0AE; /* Updated border color */
     border-radius: 5px;
     padding: 20px;
     margin: 20px;
-  }
-  
-  .current-admin-users h2,
-  .create-new-admin h2 {
+}
+
+.current-admin-users h2,
+.create-new-admin h2 {
     color: #333;
     margin-bottom: 20px;
     text-align: center;
-  }
-  
+}
+
   /* Current Admin Users List */
-  .current-admin-users ul {
+.current-admin-users ul {
     list-style-type: none;
     padding: 0;
-  }
-  
-  .current-admin-users li {
+}
+
+.current-admin-users li {
     background-color: #ffffff;
     padding: 10px;
     margin-bottom: 10px;
@@ -56,9 +61,9 @@
     align-items: center;
     font-size: 20px;
     color: #333;
-  }
-  
-  .current-admin-users button {
+}
+
+.current-admin-users button {
     cursor: pointer;
     padding: 5px 10px;
     background-color: #f5fff5;
@@ -67,25 +72,71 @@
     font-size: 18px;
     color: #333;
     margin-left: 10px;
-  }
-  
+}
+
   /* Create New Admin Form Styles */
-  .create-new-admin {
+.create-new-admin {
     display: flex;
     flex-direction: column;
     text-align: left;
-  }
-  
-  .create-new-admin label {
+}
+
+.create-new-admin label {
     margin-bottom: 5px;
     font-size: 18px;
     color: #333;
-  }
-  
-  .create-new-admin input {
+}
+
+.create-new-admin input {
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 20px;
-  }
+}
+
+.btnCreateAdmin {
+  --border: 4px;
+  --slant: 0.5em;
+  --color: #555B6E;
+
+  font-size: 12px;
+  padding: 0.4em 1.2em;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--color);
+  background: linear-gradient(to bottom left, var(--color)  50%,#0000 50.1%) top right, linear-gradient(to top  right, var(--color)  50%,#0000 50.1%)bottom left;
+  background-size: calc(var(--slant) + 1.3*var(--border)) calc(var(--slant) + 1.3*var(--border));
+  background-repeat: no-repeat;
+  box-shadow:
+  0 0 0 200px inset var(--s,#0000),
+  0 0 0 var(--border) inset var(--color);
+  clip-path:
+      polygon(0 0, calc(100% - var(--slant)) 0, 100% var(--slant),
+          100% 100%, var(--slant) 100%,0 calc(100% - var(--slant))
+          );
+  transition: color var(--t,0.3s), background-size 0.3s;
+}
+button:focus-visible {
+  outline-offset: calc(-1*var(--border));
+  outline: var(--border) solid #000c;
+  clip-path: none;
+  background-size: 0 0;
+}
+button:hover,
+button:active{
+  background-size: 100% 100%;
+  color: #fff;
+  --t: 0.2s 0.1s;
+}
+button:active {
+  --s: #0005;
+  transition: none;
+}
+
+.buttons{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}

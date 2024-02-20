@@ -8,6 +8,7 @@ import Home from './components/home';
 import CreateFlashy from './components/createFlashy';
 import Login from './components/login';
 import CreateUser from './components/createUser';
+import CreateAdmin from './components/createAdmin';
 import Quiz from './components/quiz';
 import Edit from './components/edit';
 
