@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import './css/createAdmin.css'; // Make sure the path is correct relative to this file
+import Navbar from "./navbar";
 
 function CreateAdmin() {
 
@@ -53,7 +54,7 @@ function CreateAdmin() {
         console.log(parsed)
         if (result.status == 403) {
           window.location.href = "/home"
-          
+
         } else {
             setMessage("Admin is created")
         }
@@ -63,7 +64,7 @@ function CreateAdmin() {
       const result = await fetch("http://localhost:8080/user/admin/getall", {
         headers: {
           "Content-Type": "application/json",
-          Authorization: "bearer " +localStorage.getItem("flashyToken"),            
+          Authorization: "bearer " +localStorage.getItem("flashyToken"),
         },
         method: "GET",
       });
@@ -81,11 +82,13 @@ function CreateAdmin() {
     }, []);
 
   return (
-    <div className="app">
+    <div className="adminBody">
+      <Navbar />
+      <div className="app">
       <div className="admin-panel">
         <div className="current-admin-users">
           <h2>Current admin users</h2>
-          
+
             {/* Mockup list items */}
             {adminUsers.map((v,i) => (
             <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', position: 'relative'}}>
@@ -96,7 +99,7 @@ function CreateAdmin() {
             <li>Admin User 2 <button aria-label="Delete">🗑️</button></li>
             <li>Admin User 3 <button aria-label="Delete">🗑️</button></li> */}
             {/* Add more list items as needed */}
-          
+
         </div>
         <div className="create-new-admin">
           <h2>Create new admin</h2>
@@ -104,8 +107,9 @@ function CreateAdmin() {
             <input onChange={(e)=>handleUserName (e)} type="text" id="username" name="username" />
             <label htmlFor="password">Password:</label>
             <input onChange={(e)=>handlePassword (e)} type="password" id="password" name="password" />
-            <button onClick={() => sendCreateAdmin()}>Create Admin</button>
+            <button className="btnCreateAdmin" onClick={() => sendCreateAdmin()}>Create Admin</button>
         </div>
+      </div>
       </div>
     </div>
   );

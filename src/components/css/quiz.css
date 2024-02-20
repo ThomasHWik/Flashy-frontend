@@ -1,22 +1,36 @@
-.container {
-    position: absolute;
+.quizBody{
+    display: flex;
+    width: 100%;
+    background-color: #555B6E;
+}
+
+.containerQuiz {
+    width: 90%;
 }
 
 .gamecontainer {
     margin-top: 50px;
     display: flex;
     justify-content: center;
-    
     align-items: center;
     height: 400px;
-    
+
 }
+
+.divBtn{
+    width: 100%;
+    display: flex;
+    gap: 80px;
+    justify-content: center;
+    align-items: center;
+}
+
 .quizBox {
     position:relative;
     min-width: 400px;
     height: 100%;
     border-radius: 20px;
-   
+
     background:#BEE3DB;
     cursor: pointer;
     display: flex;
@@ -62,64 +76,28 @@
 
 
 .cardText{
-   text-align: center;
-   display: flex;
-   flex-direction: column;
-   position: relative;
-   height: 100%;
-   justify-content: center;
-   text-align: center;
-   width: 100%;
-   font-size: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 100%;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    font-size: 20px;
 }
 
 .cardText span {
     font-weight: bold;
     position: absolute;
-   
+
 
     justify-content: center;
     height: 100%;
-    
+
     top: 30px;
     right: 30px;
 
-}
-
-.buttonNext {
-    position: absolute;
-    bottom: 8%;
-    right: 30%;
-}
-
-.buttonBack {
-    position: absolute;
-    bottom: 8%;
-    left: 30%;
-}
-
-.buttonLike {
-    position: absolute;
-    bottom: 8%;
-    right: 40%;
-}
-
-.buttonFavourite {
-    position: absolute;
-    bottom: 8%;
-    left: 40%;
-}
-
-.buttonFlag {
-    position: absolute;
-    bottom: 8%;
-    right: 46%;
-}
-
-.buttonShuffle {
-    position: absolute;
-    bottom: 8%;
-    left: 46%;
 }
 
 .button{
@@ -128,7 +106,7 @@
     --color: #555B6E;
 
     font-size: 12px;
-   
+
 
     border: none;
     cursor: pointer;
@@ -140,7 +118,7 @@
     box-shadow:
     0 0 0 200px inset var(--s,#0000),
     0 0 0 var(--border) inset var(--color);
-    clip-path: 
+    clip-path:
         polygon(0 0, calc(100% - var(--slant)) 0, 100% var(--slant),
             100% 100%, var(--slant) 100%,0 calc(100% - var(--slant))
             );
@@ -148,7 +126,7 @@
     transition: color var(--t,0.3s), background-size 0.3s;
     margin: 0;
     width: 60px;
-   
+
 }
 .button:focus-visible {
     outline-offset: calc(-1*var(--border));
