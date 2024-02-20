@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import BrowseFlashy from './components/browseFlashy';
-import Profile from './components/profile';
 import Header from './components/header';
 import Home from './components/home';
 import CreateFlashy from './components/createFlashy';
@@ -21,12 +20,6 @@ function App() {
             <>
               <Header header="Browse Flashy"/>
               <BrowseFlashy />
-            </>
-          } />
-          <Route path="/profile" element={
-            <>
-              <Header header="Profile"/>
-              <Profile />
             </>
           } />
           <Route path="/home" element={
