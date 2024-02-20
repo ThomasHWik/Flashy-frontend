@@ -8,6 +8,9 @@ function Navbar(props) {
             <a href="profile">Profile</a>
             <a href="createFlashy">Create Flashy</a>
             <a href="login">Logout</a>
+            {localStorage.getItem("flashyIsAdmin") === "1" ?
+                <a href="admin">Admin</a>: null
+            }
         </div>
     )
 }
