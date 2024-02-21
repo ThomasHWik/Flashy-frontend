@@ -80,6 +80,7 @@ function Edit() {
             });
             setQuestions(cards);
             setInitialDeck(deck);
+            setIsPrivate(deck.isprivate);
 
         } else {
             alert("Failed to fetch flashcard / You are not authorized to edit this flashcard.");
@@ -138,18 +139,16 @@ function Edit() {
                         {checkAuthorization(initialDeck.username) ?
                             <div>
                                 <p>Set private</p>
-                                <Checkbox onChange={(e) => { handleIsPrivate(e) }} value={initialDeck.isprivate}></Checkbox>
+                                <label className='switch'>
+                                    <input type='checkbox' onChange={(e) => { handleIsPrivate(e) }} checked={isPrivate}></input>
+                                    <div className='slider'></div>
+                                </label>
                             </div>
                             : null
                         }
 
                     </div>
                 </div>
-                {/*  <div className='editlabelscontainer'>
-                    <h1 className='h1Q'>Question</h1>
-                    <h1 className='h1A'>Answer</h1>
-                </div>
-    */}
                 <div className='editsectioncontainer'>
                     <p>Flashcards</p>
                     <div className='editboxescontainer'>
@@ -184,7 +183,7 @@ const Box = (props) => {
     }
 
     function updateQuestion(e) {
-    
+
         setQuestion(e.target.value);
         update(e.target.value, answer);
     }

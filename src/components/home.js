@@ -65,14 +65,14 @@ function Home() {
         <div className="overview">
           <h1>My Flashies</h1>
           <div className="myFlashy">
-            {userDecks.length > 0 ? 
-              
+            {userDecks.length > 0 ?
+
               userDecks.map((v) => (
               <a href={"/quiz?uuid=" + v.uuid}>
                 <div onClick={() => togglePopup()} className="myDeckDiv">
                   {v.name}
                 </div>
-              </a>)) : 
+              </a>)) :
 
                 <p>You have no flashies</p>
             }
@@ -86,6 +86,11 @@ function Home() {
                 <a href={"/quiz?uuid=" + v.uuid}>{v.name}</a>
               </div>
             ))}
+            {/**NB!!!! */}
+            <div>
+              <p>Du har ingen favoritter enda</p>
+            </div>
+            {/**NB!!!! */}
           </div>
         </div>
       </div>

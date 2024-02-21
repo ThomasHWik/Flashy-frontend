@@ -18,7 +18,7 @@
     margin-top: 10px;
     background-color: #BEE3DB;
     position: relative;
-   
+
     height: 200px;
     border-radius: 20px;
     display: flex;
@@ -81,7 +81,7 @@ textarea {
     box-shadow:
     0 0 0 200px inset var(--s,#0000),
     0 0 0 var(--border) inset var(--color);
-    clip-path: 
+    clip-path:
         polygon(0 0, calc(100% - var(--slant)) 0, 100% var(--slant),
             100% 100%, var(--slant) 100%,0 calc(100% - var(--slant))
             );
@@ -127,7 +127,7 @@ button:active {
     box-shadow:
     0 0 0 200px inset var(--s,#0000),
     0 0 0 var(--border) inset var(--color);
-    clip-path: 
+    clip-path:
         polygon(0 0, calc(100% - var(--slant)) 0, 100% var(--slant),
             100% 100%, var(--slant) 100%,0 calc(100% - var(--slant))
             );
@@ -139,8 +139,8 @@ button:active {
     flex-direction: column;
     width: 70%;
     margin: 0 auto;
-    
-}   
+
+}
 
 .editmaincontainer>p {
     text-align: center;
@@ -154,14 +154,14 @@ button:active {
     font-size: 20px;
 }
 
-.editheadercontainer{ 
+.editheadercontainer{
     border: .5px solid;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     background-color: #BEE3DB;
 }
-.editheadercontainer div { 
+.editheadercontainer div {
 
 
     display: flex;
@@ -171,7 +171,7 @@ button:active {
 
     justify-content: space-evenly;
     text-align: center;
-    
+
 }
 .editheadercontainer div p {
     justify-self: left;
@@ -185,7 +185,7 @@ button:active {
 
 .editsectioncontainer {
     margin-bottom: 20px;
-    
+
 }
 
 .editsectioncontainer > p {
@@ -197,13 +197,7 @@ button:active {
 
 .editsectioncontainer > div {
     border-radius: 10px;
-    
-}
 
-
-
-.editboxescontainer {
-    
 }
 
 .editboxescontainer >div {
@@ -233,7 +227,7 @@ border: .5px solid;
     align-self: center;
     padding: 0;
     margin: 0 !important;
-    
+
 }
 
 .editaddcardbtn:hover {
@@ -249,7 +243,7 @@ border: .5px solid;
 .confirmeditcontainer {
     width: 100%;
     display: flex;
-    
+
 
     align-items: center;
     display: flex;
@@ -261,9 +255,9 @@ border: .5px solid;
 .confirmeditcontainer button {
     --border: 4px;
     --slant: 0.5em;
-    --color: #BEE3DB; 
-    font-size: 16px; 
-    padding: 0.6em 1.5em; 
+    --color: #BEE3DB;
+    font-size: 16px;
+    padding: 0.6em 1.5em;
     border: none;
     cursor: pointer;
     font-weight: bold;
@@ -275,12 +269,11 @@ border: .5px solid;
     box-shadow:
         0 0 0 200px inset var(--s, #0000),
         0 0 0 var(--border) inset var(--color);
-    clip-path: 
+    clip-path:
         polygon(0 0, calc(100% - var(--slant)) 0, 100% var(--slant),
                 100% 100%, var(--slant) 100%, 0 calc(100% - var(--slant))
         );
     transition: color var(--t, 0.3s), background-size 0.3s;
-
 
     margin-bottom: 100px;
 }
@@ -302,4 +295,53 @@ border: .5px solid;
 .confirmeditcontainer button:active {
     --s: #0005;
     transition: none;
+}
+
+.switch {
+    margin: auto;
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 28px;
+    outline: none;
+}
+.switch input {
+    position: relative;
+    top: -99999px;
+    left: -99999px;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+}
+input:checked + .slider {
+    background-color: #555B6E;
+}
+input:focus + .slider {
+    box-shadow: 0 0 1px #555B6E;
+}
+input:checked + .slider:before {
+    -webkit-transform: translateX(21px);
+    -ms-transform: translateX(21px);
+    transform: translateX(21px);
 }
