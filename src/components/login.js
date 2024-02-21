@@ -59,7 +59,7 @@ function Login() {
             <div className="login">
                 <h1>Flashy login</h1>
                 <p>Username: <input onChange={(e)=>handleUserName (e)} type="text"></input></p>
-                <p>Password: <input onChange={(e)=>handlePassword(e)} type="text"></input></p>
+                <p>Password: <input onChange={(e)=>handlePassword(e)} type={"password"}></input></p>
                 <button className="btnLogin"  onClick={() => sendLogin()}>Log in</button>
                 <p>{message}</p>
                 <a href="/createUser">

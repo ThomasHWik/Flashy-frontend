@@ -14,7 +14,7 @@ import Edit from './components/edit';
 function App() {
   return (
     <Router>
-      <div>
+      <div style={{height: "100vh"}}>
         <Routes>
           <Route path="/browseFlashy" element={
             <>

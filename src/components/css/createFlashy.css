@@ -5,7 +5,12 @@
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     margin-top: 200;
 
+}
+.editcontainer{
+    display: flex;
 
+    background-color: #555B6E;
+    min-height: calc(100vh - 90px);
 }
 
 .title{
