@@ -70,12 +70,11 @@ function CreateFlashy() {
 
         if (status === 200) {
             window.location.href = "/home"
-        } else if (status === 403) {
+        } else {
             alert("You are not authorized to create flashcard.");
+            window.location.href = "/";
         }
-        else {
-            alert("An error occurred. Please try again.");
-        }
+        
         setDisableConfirm(false);
     }
 

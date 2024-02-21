@@ -16,11 +16,6 @@ function Quiz() {
   const queryParameters = new URLSearchParams(window.location.search);
   const uuid = queryParameters.get("uuid");
 
-  useEffect(() => {
-    console.log("Cards in deck:", deck.cards);
-  }, [deck.cards]); // logs changes to card deck (such as loading and shuffling)
-
-
   async function fetchFlashyInfo() {
     const result = await fetch("http://localhost:8080/flashcard/id/" + uuid, {
       headers: {
@@ -30,10 +25,17 @@ function Quiz() {
       method: "GET",
     });
     console.log(result);
+    if (result.status === 200) {
     const decks = await result.json();
     console.log(decks);
     setDeck(decks);
+    } else {
+      alert("You are not authorized to view this deck.");
+      window.location.href = "/";
+    }
   }
+
+
 
   // shuffle the flashcard deck
   function shuffleDeck() {
@@ -82,7 +84,8 @@ function Quiz() {
     if (result.status === 200) {
       window.location.href = "/home";
     } else if (result.status === 403) {
-      alert("You are not authorized to delete this deck.");
+      alert("You are not authorized to delete this deck. Please log in as an authorized user.");
+      window.location.href = "/";
     } else {
       alert("An error occurred. Please try again.");
     }

@@ -83,6 +83,7 @@ function Edit() {
 
         } else {
             alert("Failed to fetch flashcard / You are not authorized to edit this flashcard.");
+            window.location.href = "/";
         }
 
     }
@@ -110,6 +111,7 @@ function Edit() {
             window.location.href = "/quiz?uuid=" + initialDeck.uuid;
         } else if (status === 403) {
             alert("You are not authorized to edit this flashcard.");
+            window.location.href = "/";
         }
         else {
             alert("An error occurred. Please try again.");

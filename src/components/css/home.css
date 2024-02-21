@@ -44,6 +44,24 @@
     padding-left: 2%;
 }
 
+.myFlashy {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+
+.myFlashy a div {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.myFlashy > p {
+    text-align: center;
+}
+
 .myDeckDiv{
     width: 100%;
     height: 50px;

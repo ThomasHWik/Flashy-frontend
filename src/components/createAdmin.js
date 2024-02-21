@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import './css/createAdmin.css'; // Make sure the path is correct relative to this file
 import Navbar from "./navbar";
 
@@ -32,6 +31,9 @@ function CreateAdmin() {
       console.log(result.status)
 
       fetchAdmins()
+    } else {
+      alert("You are not authorized to delete admin.")
+      window.location.href = "/"
     }
     }
 
@@ -49,15 +51,13 @@ function CreateAdmin() {
         )
         console.log({username: name, password: userPassword})
         console.log(result)
-        console.log(result.status)
-        const parsed = await result.json()
-        console.log(parsed)
-        if (result.status == 403) {
-          window.location.href = "/home"
-
-        } else {
-            setMessage("Admin is created")
-        }
+        if (result.status == 200){
+          setMessage("Admin is created");
+          await fetchAdmins();
+        } else  {
+            alert("You are not authorized to create admin.");
+            window.location.href = "/";
+        } 
     }
 
     async function fetchAdmins() {
@@ -73,7 +73,9 @@ function CreateAdmin() {
       if (result.status == 200){
         const admins = await result.json()
         setAdminUsers(admins)
-        console.log(admins)
+      } else {
+        alert("You are not authorized to view admins.");
+        window.location.href = "/";
       }
     }
 
