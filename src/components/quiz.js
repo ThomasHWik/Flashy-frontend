@@ -118,6 +118,20 @@ function Quiz() {
     cursor: "pointer",
   };
 
+  /* LIKE, FAV og FLAG buttons
+    <p className="buttonFlag">
+      <button style={buttonEmojiStyle}>❗</button>
+    </p>
+
+    <p className="buttonLike">
+      <button style={buttonEmojiStyle}>👍</button>
+    </p>
+
+    <p className="buttonFavourite">
+      <button style={buttonEmojiStyle}>🌟</button>
+    </p>
+  */
+
   return (
     <div className="quizBody">
       <Navbar />
@@ -152,22 +166,10 @@ function Quiz() {
             </button>
           </p>
 
-          <p className="buttonFavourite">
-            <button style={buttonEmojiStyle}>🌟</button>
-          </p>
-
           <p className="buttonShuffle">
             <button style={buttonEmojiStyle} onClick={() => shuffleDeck()}>
               🔃
             </button>
-          </p>
-
-          <p className="buttonFlag">
-            <button style={buttonEmojiStyle}>❗</button>
-          </p>
-
-          <p className="buttonLike">
-            <button style={buttonEmojiStyle}>👍</button>
           </p>
 
           <p className="buttonNext">
