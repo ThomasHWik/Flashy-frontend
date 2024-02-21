@@ -45,10 +45,10 @@ function CreateUser() {
         <div className="createUser">
             <h1>Create Flashy user</h1>
             <p>Username: <input onChange={(e)=>handleUserName (e)} type="text"></input></p>
-            <p>Password: <input onChange={(e)=>handlePassword (e)} type="text"></input></p>
+            <p>Password: <input onChange={(e)=>handlePassword (e)} type={"password"}></input></p>
             <button onClick={() => sendCreateUser()}>Create User</button>
             <p>{message}</p>
-            <a href="/login">
+            <a href="/">
                 <button>Log in instead</button>
             </a>
 
