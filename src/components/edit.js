@@ -188,7 +188,7 @@ const Box = (props) => {
     }
 
     function updateAnswer(e) {
- 
+
         setAnswer(e.target.value);
         update(question, e.target.value);
     }
