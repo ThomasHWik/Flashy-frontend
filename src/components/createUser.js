@@ -42,16 +42,17 @@ function CreateUser() {
     }
 
     return (
-        <div className="createUser">
-            <h1>Create Flashy user</h1>
-            <p>Username: <input onChange={(e)=>handleUserName (e)} type="text"></input></p>
-            <p>Password: <input onChange={(e)=>handlePassword (e)} type={"password"}></input></p>
-            <button onClick={() => sendCreateUser()}>Create User</button>
-            <p>{message}</p>
-            <a href="/">
-                <button>Log in instead</button>
-            </a>
-
+        <div className="createUserContainer">
+            <div className="createUser">
+                <h1>Create Flashy user</h1>
+                <p>Username: <input onChange={(e)=>handleUserName (e)} type="text"></input></p>
+                <p>Password: <input onChange={(e)=>handlePassword (e)} type={"password"}></input></p>
+                <button onClick={() => sendCreateUser()} className="btnCreateUser">Create User</button>
+                <p>{message}</p>
+                <a href="/">
+                    <button className="btnLogInInstead">Log in instead</button>
+                </a>
+            </div>
         </div>
     )
 }
