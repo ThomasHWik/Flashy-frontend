@@ -29,10 +29,15 @@ function Home() {
         method: "GET",
       }
     );
-    console.log(result);
-    const decks = await result.json();
-    setUserDecks(decks.carddecks);
-    console.log(decks);
+    if (result.status === 200) {
+      console.log(result);
+      const decks = await result.json();
+      setUserDecks(decks.carddecks);
+      console.log(decks);
+    } else {
+      alert("Please login to view your decks.");
+      window.location.href = "/";
+    }
   }
 
   async function fetchFavoriteDecks() {
@@ -60,13 +65,17 @@ function Home() {
         <div className="overview">
           <h1>My Flashies</h1>
           <div className="myFlashy">
-            {userDecks.map((v) => (
+            {userDecks.length > 0 ? 
+              
+              userDecks.map((v) => (
               <a href={"/quiz?uuid=" + v.uuid}>
                 <div onClick={() => togglePopup()} className="myDeckDiv">
                   {v.name}
                 </div>
-              </a>
-            ))}
+              </a>)) : 
+
+                <p>You have no flashies</p>
+            }
           </div>
         </div>
         <div className="overview">
