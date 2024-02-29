@@ -74,7 +74,7 @@ function CreateFlashy() {
             alert("You are not authorized to create flashcard.");
             window.location.href = "/";
         }
-        
+
         setDisableConfirm(false);
     }
 
@@ -89,19 +89,18 @@ function CreateFlashy() {
                     <div className='editheadercontainer'>
                         <div>
                             <p>Title</p>
-                            <input onChange={(e) => updateName(e)} placeholder='Title' value={name}></input>
+                            <input className='titleInput' onChange={(e) => updateName(e)} placeholder='Title' value={name}></input>
                         </div>
-                       
-                            <div>
-                                <p>Set private</p>
-                                <Checkbox onChange={(e) => { handleIsPrivate(e) }} value={isPrivate}></Checkbox>
-                            </div>
-                          
-                        
-
+                        <div>
+                            <p>Set private</p>
+                            <label className='switch'>
+                                <input type='checkbox' onChange={(e) => { handleIsPrivate(e) }} value={isPrivate}></input>
+                                <div className='slider'></div>
+                            </label>
+                        </div>
                     </div>
                 </div>
-    
+
                 <div className='editsectioncontainer'>
                     <p>Flashcards</p>
                     <div className='editboxescontainer'>
@@ -136,7 +135,7 @@ const Box = (props) => {
     }
 
     function updateQuestion(e) {
-    
+
         setQuestion(e.target.value);
         update(e.target.value, answer);
     }

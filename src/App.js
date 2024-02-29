@@ -52,13 +52,13 @@ function App() {
           } />
           <Route path ="/quiz" element ={
             <>
-              <Header header = "Flash-name"/>
+              <Header header = "Flashy!"/>
               <Quiz />
               </>
           } />
           <Route path ="/edit" element ={
             <>
-              <Header header = "Flash-name"/>
+              <Header header = "Edit Flashy"/>
               <Edit />
               </>
           } />

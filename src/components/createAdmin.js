@@ -57,7 +57,7 @@ function CreateAdmin() {
         } else  {
             alert("You are not authorized to create admin.");
             window.location.href = "/";
-        } 
+        }
     }
 
     async function fetchAdmins() {
@@ -91,7 +91,6 @@ function CreateAdmin() {
         <div className="current-admin-users">
           <h2>Current admin users</h2>
 
-            {/* Mockup list items */}
             {adminUsers.map((v,i) => (
             <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', position: 'relative'}}>
               <p>{v} <button style={{position: 'absolute', right: '0' }}onClick={() => deleteAdmin(v)} aria-label="Delete">🗑️</button></p>
@@ -100,7 +99,7 @@ function CreateAdmin() {
             {/* <li> <button aria-label="Delete">🗑️</button></li>
             <li>Admin User 2 <button aria-label="Delete">🗑️</button></li>
             <li>Admin User 3 <button aria-label="Delete">🗑️</button></li> */}
-            {}
+            {/* Add more list items as needed */}
 
         </div>
         <div className="create-new-admin">
