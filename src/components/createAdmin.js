@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import './css/createAdmin.css'; // Make sure the path is correct relative to this file
+import './css/createAdmin.css';
 import Navbar from "./navbar";
 
 function CreateAdmin() {
@@ -100,7 +100,7 @@ function CreateAdmin() {
             {/* <li> <button aria-label="Delete">🗑️</button></li>
             <li>Admin User 2 <button aria-label="Delete">🗑️</button></li>
             <li>Admin User 3 <button aria-label="Delete">🗑️</button></li> */}
-            {/* Add more list items as needed */}
+            {}
 
         </div>
         <div className="create-new-admin">
