@@ -20,7 +20,7 @@ function Home() {
   async function fetchUserDecks() {
     const result = await fetch(
       "http://localhost:8080/flashcard/user/" +
-        localStorage.getItem("flashyUserName"),
+      localStorage.getItem("flashyUserName"),
       {
         headers: {
           "Content-Type": "application/json",
@@ -30,10 +30,10 @@ function Home() {
       }
     );
     if (result.status === 200) {
-      console.log(result);
+
       const decks = await result.json();
       setUserDecks(decks.carddecks);
-      console.log(decks);
+
     } else {
       alert("Please login to view your decks.");
       window.location.href = "/";
@@ -41,21 +41,30 @@ function Home() {
   }
 
   async function fetchFavoriteDecks() {
-    const result = await fetch("http://localhost:8080/flashcard/favorites", {
+    const result = await fetch("http://localhost:8080/flashcard/userfavorites/" + localStorage.getItem("flashyUserName"), {
       headers: {
         "Content-Type": "application/json",
+        Authorization: "bearer " + localStorage.getItem("flashyToken"),
       },
       method: "GET",
     });
     console.log(result);
-    const decks = await result.json();
-    setUserDecks(decks.carddecks);
-    console.log(decks);
+    if (result.status === 200) {
+      const decks = await result.json();
+      console.log(decks);
+      setFavoriteDecks(decks.carddecks);
+    } else if (result.status === 500) {
+      alert("A server error ocurred");
+    } else {
+      alert("Please login to view your favorite decks.");
+      window.location.href = "/";
+    }
+
   }
 
   useEffect(() => {
     fetchUserDecks();
-    // fetchFavoriteDecks();
+    fetchFavoriteDecks();
   }, []);
 
   return (
@@ -68,29 +77,30 @@ function Home() {
             {userDecks.length > 0 ?
 
               userDecks.map((v) => (
-              <a href={"/quiz?uuid=" + v.uuid}>
-                <div onClick={() => togglePopup()} className="myDeckDiv">
-                  {v.name}
-                </div>
-              </a>)) :
+                <a href={"/quiz?uuid=" + v.uuid}>
+                  <div onClick={() => togglePopup()} className="myDeckDiv">
+                    {v.name}
+                  </div>
+                </a>)) :
 
-                <p>You have no flashies</p>
+              <p>You have no flashies</p>
             }
           </div>
         </div>
         <div className="overview">
           <h1>My Favorites</h1>
-          <div className="favFlashy">
-            {favoriteDecks.map((v) => (
-              <div onClick={() => togglePopup()}>
-                <a href={"/quiz?uuid=" + v.uuid}>{v.name}</a>
-              </div>
-            ))}
-            {/**NB!!!! */}
-            <div>
-              <p>Du har ingen favoritter enda</p>
-            </div>
-            {/**NB!!!! */}
+          <div className="myFlashy">
+            {favoriteDecks.length > 0 ?
+              favoriteDecks.map((v) => (
+                <a href={"/quiz?uuid=" + v.uuid}>
+                  <div onClick={() => togglePopup()} className="myDeckDiv">
+                    {v.name}
+                  </div>
+                </a>)) :
+
+              <p>You have no favorites</p>
+            }
+
           </div>
         </div>
       </div>
