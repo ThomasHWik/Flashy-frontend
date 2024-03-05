@@ -16,6 +16,16 @@ function Quiz() {
   const queryParameters = new URLSearchParams(window.location.search);
   const uuid = queryParameters.get("uuid");
 
+  function markAsDifficult() {
+    setDeck((currentDeck) => {
+      const currentCard = currentDeck.cards[currentCardIndex];
+      let newList = [...currentDeck.cards, currentCard]; 
+      return { ...currentDeck, cards: newList}; 
+      });
+      setCurrentCardIndex(0);
+      setShowAnswer(0);
+  }
+
   async function fetchFlashyInfo() {
     const result = await fetch("http://localhost:8080/flashcard/id/" + uuid, {
       headers: {
@@ -34,8 +44,6 @@ function Quiz() {
       window.location.href = "/";
     }
   }
-
-
 
   // shuffle the flashcard deck
   function shuffleDeck() {
@@ -57,11 +65,21 @@ function Quiz() {
     setShowAnswer(0);
   }
 
+  function endOfDeck() {
+    setCurrentCardIndex(deck.cards.length - 1);
+    setShowAnswer(0);
+  } 
+
   function previousCard() {
     if (currentCardIndex == 0) {
       return;
     }
     setCurrentCardIndex((currentCardIndex - 1) % deck.cards.length);
+    setShowAnswer(0);
+  }
+
+  function startOfDeck() {
+    setCurrentCardIndex(0);
     setShowAnswer(0);
   }
 
@@ -89,10 +107,7 @@ function Quiz() {
     } else {
       alert("An error occurred. Please try again.");
     }
-
-
   }
-
 
   function checkAuthorization(username) {
     return localStorage.getItem("flashyUserName") === deck.username || localStorage.getItem("flashyIsAdmin") === "1";
@@ -160,9 +175,16 @@ function Quiz() {
 
 
         <div className="divBtn">
+
+        <p className="buttonFirst">
+            <button style={buttonEmojiStyle} onClick={() => startOfDeck()}>
+              ⏮️
+            </button>
+          </p>
+
           <p className="buttonBack">
             <button style={buttonEmojiStyle} onClick={() => previousCard()}>
-              👈
+              ⬅️
             </button>
           </p>
 
@@ -174,7 +196,19 @@ function Quiz() {
 
           <p className="buttonNext">
             <button disabled={loadingDelete} style={buttonEmojiStyle} onClick={() => nextCard()}>
-              👉
+              ➡️
+            </button>
+          </p>
+
+          <p className="buttonLast">
+            <button disabled={loadingDelete} style={buttonEmojiStyle} onClick={() => endOfDeck()}>
+              ⏭️
+            </button>
+          </p>
+
+          <p className="buttonFlag">
+            <button style={buttonEmojiStyle} onClick={() => markAsDifficult()}>
+            ❗
             </button>
           </p>
 
