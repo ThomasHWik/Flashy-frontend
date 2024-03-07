@@ -1,0 +1,62 @@
+.body {
+    min-height: 100%;
+    height: fit-content;
+}
+
+.containerPubProf {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pubprof_header {
+    justify-self: center;
+}
+
+.pubprof_header h1 {
+    text-align: center;
+}
+
+.pubprof_header span {
+    font-weight: normal;
+}
+
+.pubprof_decks {
+    min-width: 500px;
+    text-align: center;
+}
+
+.pubprof_decks >p {
+    font-size: 25px;
+    font-weight: 600;
+    
+}
+
+.pubprof_stats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    background-color: #BEE3DB;
+    height: 120px;
+    width: 420px;
+    padding: 20px;
+    text-decoration: none;
+    color: #555B6E;
+    font-weight: bold;
+    font-size: 1.1em;
+    padding-left: 2%;
+    border-radius: 20px;
+}
+
+.pubprof_stats > p {
+    margin: 0;
+    padding: 10px;
+}
+
+.pubprof_statheader {
+    font-size: 25px;
+    font-weight: 600;
+}
