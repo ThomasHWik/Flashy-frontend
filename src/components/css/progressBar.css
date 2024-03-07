@@ -1,0 +1,18 @@
+.progressContainer {
+    width: 44%; /* Trekker fra total marg på begge sider */
+    margin: 40px auto; /* Øker toppmargen til 40px og sentrerer boksen horisontalt */
+    background-color: #ddd; /* Grå bakgrunn for kontrast */
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Subtil skygge rundt containeren */
+    overflow: hidden; /* Sørger for at den indre baren holder seg innenfor grensene */
+}
+
+
+.progressBar {
+    height: 20px;
+    width: 0; /* Initialiser bredden til 0 og la den fylles via JavaScript */
+    background-color: #4CAF50; /* Grønn farge for progressbaren */
+    border-radius: 10px;
+    transition: width 0.5s ease-in-out; /* Glatte overganger for bredden */
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.4); /* Skygge på selve progressbaren */
+}

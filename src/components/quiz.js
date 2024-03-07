@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./css/quiz.css";
 import Navbar from "./navbar";
+import ProgressBar from "./progressBar";
 
 function Quiz() {
   const [deck, setDeck] = useState({
@@ -147,18 +148,19 @@ function Quiz() {
     </p>
   */
 
-  return (
-    <div className="quizBody">
-      <Navbar />
-      <div className="containerQuiz">
-        <div className="gamecontainer">
-          <div className="infoBox">
-            <h3>{deck.name}</h3>
-            <p>Made by: <span style={{ fontWeight: "bold" }}>{deck.username}</span></p>
-            <p>Cards: <span style={{ fontWeight: "bold" }}>{deck.cards.length}</span></p>
-            <div className="deleteeditcontainer">
-              <button onClick={() => editDeck()} className="button">Edit</button>
-              {checkAuthorization() ? <button className="button" onClick={() => deleteDeck()}>Delete</button> : <></>}
+    return (
+      <div className="quizBody">
+        <Navbar />
+        <div className="containerQuiz">
+        <ProgressBar current={currentCardIndex} total={deck.cards.length} /> {/* ProgressBar component is placed here */}
+          <div className="gamecontainer">
+            <div className="infoBox">
+              <h3>{deck.name}</h3>
+              <p>Made by: <span style={{ fontWeight: "bold" }}>{deck.username}</span></p>
+              <p>Cards: <span style={{ fontWeight: "bold" }}>{deck.cards.length}</span></p>
+              <div className="deleteeditcontainer">
+                <button onClick={() => editDeck()} className="button">Edit</button>
+                {checkAuthorization() ? <button className="button" onClick={() => deleteDeck()}>Delete</button> : <></>}
 
             </div>
           </div>
