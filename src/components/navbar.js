@@ -12,8 +12,8 @@ function Navbar(props) {
 
     return (
         <div className="nav">
-            <a href="home">Home</a>
             <a href="createFlashy">Create Flashy</a>
+            <a href="home">Profile</a>
 
 
             {localStorage.getItem("flashyIsAdmin") === "1" ?

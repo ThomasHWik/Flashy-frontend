@@ -1,7 +1,6 @@
 .quizBody{
     display: flex;
     width: 100%;
-    background-color: #555B6E;
     height: calc(100vh - 90px);
 }
 

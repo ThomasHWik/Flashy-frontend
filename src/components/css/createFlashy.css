@@ -8,8 +8,6 @@
 }
 .editcontainer{
     display: flex;
-
-    background-color: #555B6E;
     min-height: calc(100vh - 90px);
 }
 

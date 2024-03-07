@@ -10,22 +10,23 @@ import CreateUser from './components/createUser';
 import CreateAdmin from './components/createAdmin';
 import Quiz from './components/quiz';
 import Edit from './components/edit';
+import EditProfile from './components/editProfile';
 import PublicProfile from './components/publicprofile';
 
 function App() {
   return (
     <Router>
-      <div style={{height: "100vh"}}>
+      <div style={{ height: "100vh" }}>
         <Routes>
           <Route path="/browseFlashy" element={
             <>
-              <Header header="Browse Flashy"/>
+              <Header header="Browse Flashy" />
               <BrowseFlashy />
             </>
           } />
           <Route path="/home" element={
             <>
-              <Header header="Flashy!"/>
+              <Header header="Flashy!" />
               <Home />
             </>
           } />
@@ -36,13 +37,13 @@ function App() {
           } />
           <Route path="/createFlashy" element={
             <>
-              <Header header="Create Flashy"/>
+              <Header header="Create Flashy" />
               <CreateFlashy />
             </>
           } />
           <Route path="/createAdmin" element={
             <>
-              <Header header="Create Admin"/>
+              <Header header="Create Admin" />
               <CreateAdmin />
             </>
           } />
@@ -51,23 +52,29 @@ function App() {
               <CreateUser />
             </>
           } />
-          <Route path ="/quiz" element ={
+          <Route path="/quiz" element={
             <>
-              <Header header = "Flashy!"/>
+              <Header header="Flashy!" />
               <Quiz />
-              </>
+            </>
           } />
-          <Route path ="/edit" element ={
+          <Route path="/edit" element={
             <>
-              <Header header = "Edit Flashy"/>
+              <Header header="Edit Flashy" />
               <Edit />
-              </>
+            </>
           } />
-          <Route path ="/publicprofile" element ={
+          <Route path="/EditProfile" element={
             <>
-              <Header header = "Public profile" />
+              <Header header="Edit profile" />
+              <EditProfile />
+            </>
+          } />
+          <Route path="/publicprofile" element={
+            <>
+              <Header header="Public profile" />
               <PublicProfile />
-              </>
+            </>
           } />
         </Routes>
       </div>
