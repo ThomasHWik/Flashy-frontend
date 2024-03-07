@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./css/home.css";
 import Navbar from "./navbar";
+import CarddeckListElement from "./lists/CarddeckListElement";
 
 function Home() {
   const [userDecks, setUserDecks] = useState([]);
@@ -30,8 +31,9 @@ function Home() {
       }
     );
     if (result.status === 200) {
-
+      
       const decks = await result.json();
+      console.log(decks);
       setUserDecks(decks.carddecks);
 
     } else {
@@ -77,13 +79,10 @@ function Home() {
             {userDecks.length > 0 ?
 
               userDecks.map((v) => (
-                <a href={"/quiz?uuid=" + v.uuid}>
-                  <div onClick={() => togglePopup()} className="myDeckDiv">
-                    {v.name}
-                  </div>
-                </a>)) :
+                <CarddeckListElement carddeck={v} />
+                )) :
 
-              <p>You have no flashies</p>
+              <p>You have no flashies.</p>
             }
           </div>
         </div>
@@ -92,11 +91,9 @@ function Home() {
           <div className="myFlashy">
             {favoriteDecks.length > 0 ?
               favoriteDecks.map((v) => (
-                <a href={"/quiz?uuid=" + v.uuid}>
-                  <div onClick={() => togglePopup()} className="myDeckDiv">
-                    {v.name}
-                  </div>
-                </a>)) :
+                <CarddeckListElement carddeck={v} />
+
+                )) :
 
               <p>You have no favorites</p>
             }

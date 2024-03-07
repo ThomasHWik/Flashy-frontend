@@ -10,6 +10,7 @@ import CreateUser from './components/createUser';
 import CreateAdmin from './components/createAdmin';
 import Quiz from './components/quiz';
 import Edit from './components/edit';
+import PublicProfile from './components/publicprofile';
 
 function App() {
   return (
@@ -60,6 +61,12 @@ function App() {
             <>
               <Header header = "Edit Flashy"/>
               <Edit />
+              </>
+          } />
+          <Route path ="/publicprofile" element ={
+            <>
+              <Header header = "Public profile" />
+              <PublicProfile />
               </>
           } />
         </Routes>
