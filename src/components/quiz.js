@@ -23,7 +23,6 @@ function Quiz() {
       let newList = [...currentDeck.cards, currentCard]; 
       return { ...currentDeck, cards: newList}; 
       });
-      setCurrentCardIndex(0);
       setShowAnswer(0);
   }
 
@@ -134,6 +133,18 @@ function Quiz() {
     cursor: "pointer",
   };
 
+  const buttonFlagStyle = {
+    padding: 10,
+    border: "#FAF9F9",
+    fontSize: "30px",
+    background: "#bee3db",
+    cursor: "pointer",
+    position: "absolute",
+    top: 10,
+    left: 10,
+    zIndex: 3,
+  };
+
   /* LIKE, FAV og FLAG buttons
     <p className="buttonFlag">
       <button style={buttonEmojiStyle}>❗</button>
@@ -164,7 +175,14 @@ function Quiz() {
 
             </div>
           </div>
+
           <div className="quizBox" onClick={() => setShowAnswer(!showAnswer)}>
+            <p>
+              <button style={buttonFlagStyle} onClick={(e) => {e.stopPropagation(); markAsDifficult();}}> 
+              ❗
+              </button>
+            </p>
+            
             <p className="cardText">
               <span>#{currentCardIndex+1}</span>
               {deck.cards.length > 0 ? showAnswer
@@ -205,12 +223,6 @@ function Quiz() {
           <p className="buttonLast">
             <button disabled={loadingDelete} style={buttonEmojiStyle} onClick={() => endOfDeck()}>
               ⏭️
-            </button>
-          </p>
-
-          <p className="buttonFlag">
-            <button style={buttonEmojiStyle} onClick={() => markAsDifficult()}>
-            ❗
             </button>
           </p>
 
