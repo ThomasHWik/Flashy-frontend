@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./css/home.css";
 import Navbar from "./navbar";
+import { Link } from "react-router-dom";
 import CarddeckListElement from "./lists/CarddeckListElement";
 
 function Home() {
@@ -99,6 +100,11 @@ function Home() {
             }
 
           </div>
+        </div>
+        <div>
+          <Link to ="/editProfile">
+            <button className="editProfileBtn" >Edit Profile</button>
+          </Link >
         </div>
       </div>
     </div>
