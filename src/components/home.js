@@ -83,6 +83,7 @@ function Home() {
                 <CarddeckListElement carddeck={v} />
                 )) :
 
+
               <p>You have no flashies.</p>
             }
           </div>
