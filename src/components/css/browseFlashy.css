@@ -1,0 +1,105 @@
+.browseBody{
+    background-color: #555B6E;
+    width: 100%;
+    height: calc(100% - 90px);
+    display: flex;
+}
+
+.browseContainer{
+    width: 90%;
+    display: flex;
+}
+
+.browseOverview{
+    flex: 1;
+    margin: 20px;
+    border-radius: 20px;
+    height: 60%;
+}
+
+.browseOverview h1{
+    text-align: center;
+    margin-top: 20px;
+    color: #FAF9F9;
+}
+
+.browseDiv{
+    flex: 1;
+    background-color: #BEE3DB;
+    margin: 20px;
+    border-radius: 20px;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    min-height: 300px;
+    overflow-y: auto;
+}
+
+.browseDiv a{
+    text-decoration: none;
+    color: #555B6E;
+    font-weight: bold;
+    font-size: 1.3em;
+    padding-left: 2%;
+}
+
+.browseDiv ol{
+    list-style-position: inside;
+    padding: 0;
+    margin: 0;
+}
+
+.browseDiv {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+
+.browseDiv a div {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.browseDiv > p {
+    text-align: center;
+}
+
+.browseDiv li{
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid #FAF9F9;
+}
+
+.searchDiv{
+    flex: 1;
+    background-color: #BEE3DB;
+    margin: 20px;
+    border-radius: 20px;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    min-height: 20px;
+    position: relative;
+    justify-content: 'space-between';
+
+}
+
+.searchBar {
+    height: 70%;
+    width: 50%;
+    border-radius: 20px;
+    display: flex;
+    position: relative;
+    text-align: center; 
+    justify-content: center;
+    margin: 0 auto;   
+    margin-top: 0.5%;
+    margin-bottom: 0.5%;
+}
+
+.searchButton{
+    text-align: right;
+}
