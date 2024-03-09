@@ -2,6 +2,9 @@ import React, { useEffect } from 'react'
 import './css/edit.css'
 import { Checkbox } from "@mui/material";
 import Navbar from './navbar'
+import TagSearch from './misc/TagSearch'
+import { IoIosRemoveCircle } from "react-icons/io";
+
 
 function CreateFlashy() {
 
@@ -13,12 +16,22 @@ function CreateFlashy() {
 
     const [isPrivate, setIsPrivate] = React.useState(false);
 
+    const [tags, setTags] = React.useState([]);
+
 
     const uuid = new URLSearchParams(window.location.search).get("uuid");
 
     function handleIsPrivate(e) {
         setIsPrivate(e.target.checked);
 
+    }
+
+    function handleaddtag(tag) {
+        if (tags.indexOf(tag) !== -1) {
+            return;
+        } else {
+        setTags([...tags, tag]);
+        }
     }
 
     function setCardValue(question, answer, index) {
@@ -52,9 +65,9 @@ function CreateFlashy() {
     async function confirmCreate() {
         setDisableConfirm(true);
         let cards = [];
-            questions.forEach((card) => {
-                cards.push({ question: card[0], answer: card[1]});
-            });
+        questions.forEach((card) => {
+            cards.push({ question: card[0], answer: card[1] });
+        });
 
         const result = await fetch("http://localhost:8080/flashcard/create",
             {
@@ -62,7 +75,7 @@ function CreateFlashy() {
                     "Authorization": "Bearer " + localStorage.getItem("flashyToken"),
                     "Content-Type": "application/json"
                 },
-                method: "POST", body: JSON.stringify({ name: name, cards: cards, isprivate: isPrivate ? 1 : 0 })
+                method: "POST", body: JSON.stringify({ name: name, cards: cards, tags: tags, isprivate: isPrivate ? 1 : 0 })
             }
         )
         const status = result.status;
@@ -88,18 +101,38 @@ function CreateFlashy() {
                     <p>Information</p>
                     <div className='editheadercontainer'>
                         <div>
-                            <p>Title</p>
-                            <input className='titleInput' onChange={(e) => updateName(e)} placeholder='Title' value={name}></input>
+                            <div>
+                                <p>Title</p>
+                                <input className='titleInput' onChange={(e) => updateName(e)} placeholder='Title' value={name}></input>
+                            </div>
+                            <div>
+                                <p>Set private</p>
+                                <label className='switch'>
+                                    <input type='checkbox' onChange={(e) => { handleIsPrivate(e) }} value={isPrivate}></input>
+                                    <div className='slider'></div>
+                                </label>
+                            </div>
                         </div>
-                        <div>
-                            <p>Set private</p>
-                            <label className='switch'>
-                                <input type='checkbox' onChange={(e) => { handleIsPrivate(e) }} value={isPrivate}></input>
-                                <div className='slider'></div>
-                            </label>
+                        <p className='edit_tagheader'>Tags</p>
+                        <div className='edit_currenttags_container'>
+        
+                            <div>
+                                {tags.map((tag) => {
+                                    return <div className='edit_chosentag' key={tag}>
+                                <IoIosRemoveCircle className='edit_removetagicon' color='#bb1818' onClick={() => setTags([...tags.filter(x => x !== tag)])} /> <span>{tag}</span>
+                                    </div>
+                                })}
+                            </div>
+                        </div>
+                        <div className='edit_searchtag_container'>
+                            <TagSearch onaddtag={handleaddtag} />
                         </div>
                     </div>
+
+
                 </div>
+
+
 
                 <div className='editsectioncontainer'>
                     <p>Flashcards</p>
