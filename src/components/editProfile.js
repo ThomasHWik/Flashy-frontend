@@ -4,9 +4,8 @@ import Navbar from "./navbar";
 
 function EditProfile() {
 
-    const [username, setUsername] = useState("");
+    const [username, setUsername] = useState(localStorage.getItem("flashyUserName"));
     const [password, setPassword] = useState("");
-    const [message, setMessage] = useState("");
 
     const handleUserName = (e) => {
         setUsername(e.target.value)
@@ -17,28 +16,36 @@ function EditProfile() {
     }
 
     async function sendUser() {
-        const result = await fetch("http://localhost:8080/user/change",
+        
+        const data = {
+            "username": username,
+            "password": password
+        }
+
+
+        console.log(data)
+
+        const result = await fetch("http://localhost:8080/user/change/" + localStorage.getItem("flashyUserName"),
         {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "bearer " + localStorage.getItem("flashyToken"),
             },
-            method: "POST", body: JSON.stringify(
-                {username: username, password: password}
+            method: "PUT", body: JSON.stringify(
+                data
             )
         }
         )
         console.log(result)
-        console.log(result.status)
-        const parsed = await result.json()
-        console.log(parsed)
+
         if (result.status == 200) {
+            const parsed = await result.json();
             localStorage.setItem("flashyUserName", username)
             localStorage.setItem("flashyToken", parsed.message)
             localStorage.setItem("flashyIsAdmin", parsed.isadmin)
             window.location.href = "/home"
         } else {
-            setMessage("Invalid username")
+            alert("Invalid username or password")
         }
     }
 
@@ -51,7 +58,7 @@ function EditProfile() {
                         Change Username:
                         <br></br>
                         <br></br>    
-                        <input type="text" placeholder="Enter new username" onChange={(e)=>handleUserName (e)} ></input>
+                        <input type="text" value={username} placeholder="Enter new username" onChange={(e)=>handleUserName (e)} ></input>
                     </label>
                 </div>
                 <div className="changePassword">
