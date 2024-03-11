@@ -154,14 +154,25 @@ button:active {
     font-size: 20px;
 }
 
-.editheadercontainer{
-    border: .5px solid;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+.editheadercontainer {
     background-color: #BEE3DB;
+    border: .5px solid;
+    flex-direction: row;
+  
+   
+    
 }
-.editheadercontainer div {
+
+.editheadercontainer>div{
+    display: flex;
+    justify-content: space-evenly;
+
+    
+    background-color: #BEE3DB;
+    width: 90%;
+    margin-left: 5%;
+}
+.editheadercontainer>div div {
 
 
     display: flex;
@@ -344,4 +355,61 @@ input:checked + .slider:before {
     -webkit-transform: translateX(21px);
     -ms-transform: translateX(21px);
     transform: translateX(21px);
+}
+
+.editheadercontainer {
+    text-align: center;
+    
+
+}
+
+
+.edit_tagheader {
+    font-size: 20px;
+}
+
+.edit_currenttags_container {
+    display: flex;
+}
+
+.edit_chosentag {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #BEE3DB;
+}
+
+.edit_chosentag {
+    display: flex;
+    flex-direction: row !important;
+    justify-content: center;
+    align-items: center;
+
+    background-color: turquoise ;
+    width: fit-content;
+    padding: 4px !important;
+}
+
+.edit_chosentag > .edit_removetagicon:hover {
+    cursor: pointer;
+   
+}
+
+
+.edit_chosentag > span {
+    margin: 5px;
+    padding: 0;
+
+}
+
+.edit_currenttags_container > div {
+    display: flex;
+    flex-direction: row !important;
+    flex-wrap: wrap;
+}
+
+
+.edit_searchtag_container > div {
+    width: 80%;
+
 }
