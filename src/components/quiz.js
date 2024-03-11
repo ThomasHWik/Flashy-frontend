@@ -11,7 +11,8 @@ function Quiz() {
 
   const [showAnswer, setShowAnswer] = useState(0);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
-
+  const [comments, setComments] = React.useState([]);
+   
   const [loadingDelete, setLoadingDelete] = useState(false);
 
   const queryParameters = new URLSearchParams(window.location.search);
@@ -24,6 +25,50 @@ function Quiz() {
       return { ...currentDeck, cards: newList}; 
       });
       setShowAnswer(0);
+  }
+
+  async function deleteComment(uuid) {
+    const result = await fetch("http://localhost:8080/comment/delete/"+uuid, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "bearer " + localStorage.getItem("flashyToken"),
+      },
+      method: "DELETE",
+    });
+    console.log(result);
+    if (result.status === 200) {
+
+    setComments([...comments.filter((comment) => comment.uuid !== uuid)]);
+
+    } 
+  }
+
+  function CommentSection(props) {
+    const [newComment, setNewComment] = React.useState("");
+  
+    const handleAddComment = () => {
+      sendComment(newComment);
+      setNewComment("");
+    };
+  
+    return (
+      <div className = "commentsContainer">
+        <h2 className = "commentsHeader">Comments</h2>
+          <div className= "comments">
+            {comments.map((comment, index) => (
+            <p key={index}>{comment.comment} - @<a href={"/publicprofile?u="+comment.username}>{comment.username}</a>{comment.username == localStorage.getItem("flashyUserName") ? <button className="emojiButton" onClick={(e) => {deleteComment(comment.uuid);}}>❌</button> : ""
+                   }</p>
+           ))} 
+          </div>
+        <textarea
+            className="commentsTextarea"
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+        />
+        <button className="commentButton" onClick={handleAddComment}>Add</button>
+      </div>
+
+    );
   }
 
   async function fetchFlashyInfo() {
@@ -39,10 +84,31 @@ function Quiz() {
     const decks = await result.json();
     console.log(decks);
     setDeck(decks);
+    setComments(decks.comments);
     } else {
       alert("You are not authorized to view this deck.");
       window.location.href = "/";
     }
+  }
+
+  async function sendComment(comment) {
+    const result = await fetch("http://localhost:8080/comment/create", {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "bearer " + localStorage.getItem("flashyToken"),
+      },
+      method: "POST",
+      body: JSON.stringify({
+        comment: comment,
+        carddeckuuid: uuid
+      }),
+    });
+    console.log(result);
+    if (result.status === 200) {
+    const res = await result.json();
+    setComments([...comments, res]);
+    } 
+    
   }
 
   // shuffle the flashcard deck
@@ -227,6 +293,9 @@ function Quiz() {
           </p>
 
         </div>
+      </div>
+      <div>
+        <CommentSection comments={comments} />
       </div>
     </div>
   );
