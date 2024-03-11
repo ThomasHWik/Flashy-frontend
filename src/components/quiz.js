@@ -18,11 +18,16 @@ function Quiz() {
   const queryParameters = new URLSearchParams(window.location.search);
   const uuid = queryParameters.get("uuid");
 
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+
+  const [likes, setLikes] = useState(0);
+
   function markAsDifficult() {
     setDeck((currentDeck) => {
       const currentCard = currentDeck.cards[currentCardIndex];
-      let newList = [...currentDeck.cards, currentCard]; 
-      return { ...currentDeck, cards: newList}; 
+      let newList = [...currentDeck.cards, currentCard];
+      return { ...currentDeck, cards: newList};
       });
       setShowAnswer(0);
   }
@@ -84,7 +89,13 @@ function Quiz() {
     const decks = await result.json();
     console.log(decks);
     setDeck(decks);
+
+    setIsFavorite(decks.isfavorited);
+    setIsLiked(decks.isliked);
+    setLikes(decks.likecount);
+
     setComments(decks.comments);
+
     } else {
       alert("You are not authorized to view this deck.");
       window.location.href = "/";
@@ -134,7 +145,7 @@ function Quiz() {
   function endOfDeck() {
     setCurrentCardIndex(deck.cards.length - 1);
     setShowAnswer(0);
-  } 
+  }
 
   function previousCard() {
     if (currentCardIndex == 0) {
@@ -143,6 +154,86 @@ function Quiz() {
     setCurrentCardIndex((currentCardIndex - 1) % deck.cards.length);
     setShowAnswer(0);
   }
+
+  async function favoriteDeck() {
+    console.log(uuid);
+    if (!isFavorite) {
+      const result = await fetch(
+        "http://localhost:8080/flashcard/favorite/add/" + uuid,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "bearer " + localStorage.getItem("flashyToken"),
+          },
+          method: "POST",
+        }
+      );
+      console.log(result);
+      if (result.status === 200) {
+        alert("Deck added to favorites");
+        setIsFavorite(true);
+      } else {
+        alert("An error occurred.  mip Please try again.");
+      }
+    }
+    else{
+      const result = await fetch(
+        "http://localhost:8080/flashcard/favorite/remove/" + uuid,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "bearer " + localStorage.getItem("flashyToken"),
+          },
+          method: "DELETE",
+        }
+      );
+      if (result.status === 200) {
+        alert("Deck removed from favorites");
+        setIsFavorite(false);
+      } else {
+        alert("An error occurred. Please try again.");
+      }
+    }
+  }
+  async function likeDeck() {
+    if (!isLiked) {
+      const result = await fetch(
+        "http://localhost:8080/flashcard/like/add/" + uuid,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "bearer " + localStorage.getItem("flashyToken"),
+          },
+          method: "POST",
+        });
+      console.log(result);
+      if (result.status === 200) {
+        setIsLiked(true);
+        setLikes(likes + 1);
+      } else {
+        alert("An error occurred. Please try again.");
+      }
+    }
+    else{
+      const result = await fetch(
+        "http://localhost:8080/flashcard/like/remove/" + uuid,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "bearer " + localStorage.getItem("flashyToken"),
+          },
+          method: "DELETE",
+        });
+      if (result.status === 200) {
+        setIsLiked(false);
+        setLikes(likes - 1);
+      }
+      else {
+        alert("An error occurred. Please try again.");
+      }
+    }
+  }
+
 
   function startOfDeck() {
     setCurrentCardIndex(0);
@@ -212,17 +303,8 @@ function Quiz() {
   };
 
   /* LIKE, FAV og FLAG buttons
-    <p className="buttonFlag">
-      <button style={buttonEmojiStyle}>❗</button>
-    </p>
 
-    <p className="buttonLike">
-      <button style={buttonEmojiStyle}>👍</button>
-    </p>
 
-    <p className="buttonFavourite">
-      <button style={buttonEmojiStyle}>🌟</button>
-    </p>
   */
 
     return (
@@ -244,11 +326,11 @@ function Quiz() {
 
           <div className="quizBox" onClick={() => setShowAnswer(!showAnswer)}>
             <p>
-              <button style={buttonFlagStyle} onClick={(e) => {e.stopPropagation(); markAsDifficult();}}> 
+              <button style={buttonFlagStyle} onClick={(e) => {e.stopPropagation(); markAsDifficult();}}>
               ❗
               </button>
             </p>
-            
+
             <p className="cardText">
               <span>#{currentCardIndex+1}</span>
               {deck.cards.length > 0 ? showAnswer
@@ -274,10 +356,18 @@ function Quiz() {
             </button>
           </p>
 
+          <p className="buttonLike">
+            <button style={buttonEmojiStyle} onClick={() => likeDeck()}>{isLiked ? '♥︎' : '♡'}</button>
+          </p>
+
           <p className="buttonShuffle">
             <button style={buttonEmojiStyle} onClick={() => shuffleDeck()}>
               🔃
             </button>
+          </p>
+
+          <p className="buttonFavourite">
+            <button className="btnFav" style={buttonEmojiStyle} onClick={() => favoriteDeck()}>{isFavorite ?  '★' : '☆'}</button>
           </p>
 
           <p className="buttonNext">
