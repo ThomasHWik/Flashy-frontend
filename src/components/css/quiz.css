@@ -20,7 +20,8 @@
 .divBtn{
     width: 100%;
     display: flex;
-    gap: 80px;
+    margin-top: 20px;
+    gap: 40px;
     justify-content: center;
     align-items: center;
 }
@@ -45,6 +46,7 @@
 
     position:relative;
     min-width:180px;
+    max-width: 220px;
     height: calc(100% - 40px);
     margin-right: 10px;
     border-radius: 20px;
@@ -53,9 +55,15 @@
     text-align: center;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+   
     box-shadow: 0 0 2px 0 rgba(0,0,0,0.2);
-    justify-content: start;
+
+
+}
+
+.infoBox p {
+    margin: 8px;
+
 
 }
 
@@ -229,4 +237,35 @@
     font: inherit;
     cursor: pointer;
     outline: inherit;
+}
+
+.outline-iconheart svg path {
+  fill: none !important; 
+  stroke: black; 
+  stroke-width: 2px; 
+
+}
+.outline-iconstar svg path {
+    fill: none; 
+    stroke: black; 
+    stroke-width: 30px; 
+  }
+
+.quiz_tagscontainer {
+    justify-content: center;
+    max-width: 220px;
+
+    margin-top: 10px;
+    flex-wrap: wrap;
+    display: flex;
+    
+
+}
+
+.quiz_tags {
+    border-radius: 10px;
+    margin: 3px;
+    border: .5px solid black;
+    padding: 4px;
+    text-align: center;
 }
