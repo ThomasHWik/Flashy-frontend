@@ -173,7 +173,7 @@ function Edit() {
                                 <div>
                                     <p>Editable</p>
                                     <label className='switch'>
-                                        <input type='checkbox' id="isEditableButton" onChange={(e) => { handleIsEditable(e) }} value={isEditable}></input>
+                                        <input type='checkbox' id="isEditableButton" onChange={(e) => { handleIsEditable(e) }} checked = {isEditable} value={isEditable}></input>
                                         <div className='slider'> </div>
                                     </label>
                                 </div>
