@@ -15,6 +15,28 @@ function EditProfile() {
         setPassword(e.target.value)
     }
 
+    async function deleteAccount() {
+        const result = await fetch("http://localhost:8080/user/delete/" + localStorage.getItem("flashyUserName"),
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "bearer " + localStorage.getItem("flashyToken"),
+                },
+                method: "DELETE"
+            }
+        )
+
+
+        if (result.status == 200) {
+            localStorage.removeItem("flashyUserName")
+            localStorage.removeItem("flashyToken")
+            localStorage.removeItem("flashyIsAdmin")
+            window.location.href = "/"
+        } else {
+            alert("Something went wrong.")
+        }
+    }
+
     async function sendUser() {
         
         const data = {
@@ -52,7 +74,9 @@ function EditProfile() {
     return (
         <div className="editProfileBody">
             <Navbar/>
+            <div className="editprofilecontainer">
             <div className="changeProfile">
+                
                 <div className="changeUsername">
                     <label>
                         Change Username:
@@ -69,8 +93,13 @@ function EditProfile() {
                         <input type="text" placeholder="Enter new password" value={password} onChange={(e)=>handlePassword (e)}></input>                    </label>
                 </div>
                 <button className="saveChangesButton" value={password} onClick={() => sendUser()}>Save changes</button>
+           
+                <button onClick={() => deleteAccount()} className="deleteaccountbtn">Delete account</button>
             </div>
+           
+         
         </div>
+    </div>
     )
 }
 
