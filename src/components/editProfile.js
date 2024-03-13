@@ -75,7 +75,7 @@ function EditProfile() {
             localStorage.setItem("flashyUserName", username)
             localStorage.setItem("flashyToken", parsed.message)
             localStorage.setItem("flashyIsAdmin", parsed.isadmin)
-            window.location.href = "/home"
+            window.location.href = "/profile"
         } else {
             alert("Invalid username or password")
         }
