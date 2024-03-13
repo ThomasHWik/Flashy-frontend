@@ -380,13 +380,10 @@ function Quiz() {
               ⬅️
             </button>
 
-
-       
             <div className={!isLiked ? "outline-iconheart" : ""}>
               <FcLike cursor={"pointer"} size={30}   onClick={() => likeDeck()} />
             </div>
-        
-
+  
     
             <button style={buttonEmojiStyle} onClick={() => shuffleDeck()}>
               🔃
