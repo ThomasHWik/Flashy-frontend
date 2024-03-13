@@ -324,7 +324,7 @@ function Quiz() {
         <ProgressBar current={currentCardIndex} total={deck.cards.length} /> {/* ProgressBar component is placed here */}
           <div className="gamecontainer">
             <div className="infoBox">
-              <h3>{deck.name}</h3>
+              <p style={{fontWeight: "bold"}}>{deck.name}</p>
               <p>Made by: <span style={{ fontWeight: "bold" }}><a style={{color: "black", textDecoration: "none"}} href={"/publicprofile?u="+deck.username}>@{deck.username}</a></span></p>
               <p>Cards: <span style={{ fontWeight: "bold" }}>{deck.cards.length}</span></p>
               <p>Likes: <span style={{ fontWeight: "bold" }}>{likes}</span></p>
