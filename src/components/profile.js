@@ -74,6 +74,7 @@ function Profile() {
     <div className="body">
       <Navbar />
       <div className="containerHome" >
+        <div>
         <div className="overview">
           <h1>My Flashies</h1>
           <div className="myFlashy">
@@ -102,13 +103,14 @@ function Profile() {
 
           </div>
         </div>
-        <div>
-          <Link to ="/editProfile">
+        </div>
+        <Link to ="/editProfile">
             <button className="editProfileBtn" >Edit Profile</button>
           </Link >
-        </div>
       </div>
+      
     </div>
+
   );
 }
 

@@ -7,13 +7,21 @@
 .containerHome{
     width: 90%;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.containerHome >div{
+    width: 90%;
+    display: flex;
+    flex-direction: row;
 }
 
 .overview{
     flex: 1;
     margin: 20px;
     border-radius: 20px;
-    height: 60%;
+    height: 400px;
 }
 
 .overview h1{
@@ -68,10 +76,8 @@
 }
 
 .editProfileBtn {
-    position: absolute;
-    left: 50%;
-    top: 80%;
-
+    justify-self: start;
+   
     --border: 4px;
     --slant: 0.5em;
     --color: #BEE3DB;
