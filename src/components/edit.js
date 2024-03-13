@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import './css/edit.css'
 import Navbar from './navbar'
+import { isEditable } from '@testing-library/user-event/dist/utils';
 import TagSearch from './misc/TagSearch'
 import { IoIosRemoveCircle } from "react-icons/io";
 import './css/tagsearch.css';
@@ -13,6 +14,7 @@ function Edit() {
         name: "Hovedstader",
         cards: [],
         isprivate: 0,
+        iseditable: 0,
         uuid: "wefkweofp"
     });
 
@@ -26,6 +28,7 @@ function Edit() {
 
     const [isPrivate, setIsPrivate] = React.useState(false);
 
+    const [isEditable, setIsEditable] = React.useState(false);
 
     const uuid = new URLSearchParams(window.location.search).get("uuid");
 
@@ -40,6 +43,10 @@ function Edit() {
     function handleIsPrivate(e) {
         setIsPrivate(e.target.checked);
 
+    }
+
+    function handleIsEditable(e) {
+        setIsEditable(e.target.checked);
     }
 
     function setCardValue(question, answer, index) {
@@ -96,6 +103,7 @@ function Edit() {
             setQuestions(cards);
             setInitialDeck(deck);
             setIsPrivate(deck.isprivate);
+            setIsEditable(deck.iseditable);
             setTags(deck.tags);
 
         } else {
@@ -118,7 +126,8 @@ function Edit() {
                     "Authorization": "Bearer " + localStorage.getItem("flashyToken"),
                     "Content-Type": "application/json"
                 },
-                method: "PUT", body: JSON.stringify({ name: name, cards: cards, isprivate: isPrivate ? 1 : 0, uuid: initialDeck.uuid, tags: tags })
+                method: "PUT", body: JSON.stringify({ name: name, cards: cards, isprivate: isPrivate ? 1 : 0, iseditable: isEditable ? 1 : 0, tags: tags, uuid: initialDeck.uuid })
+
             }
         )
         const status = result.status;
@@ -155,12 +164,22 @@ function Edit() {
                         </div>
                         {checkAuthorization(initialDeck.username) ?
                             <div>
-                                <p>Set private</p>
-                                <label className='switch'>
-                                    <input type='checkbox' onChange={(e) => { handleIsPrivate(e) }} checked={isPrivate}></input>
-                                    <div className='slider'></div>
-                                </label>
+                                <div>
+                                    <p>Set private</p>
+                                    <label className='switch'>
+                                        <input type='checkbox' onChange={(e) => { handleIsPrivate(e) }} checked={isPrivate}></input>
+                                        <div className='slider'></div>
+                                    </label>
+                                </div>
+                                <div>
+                                    <p>Editable</p>
+                                    <label className='switch'>
+                                        <input type='checkbox' id="isEditableButton" onChange={(e) => { handleIsEditable(e) }} value={isEditable}></input>
+                                        <div className='slider'> </div>
+                                    </label>
+                                </div>
                             </div>
+
                             : null
                         }
 

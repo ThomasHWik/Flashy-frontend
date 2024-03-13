@@ -16,6 +16,10 @@ function CreateFlashy() {
 
     const [isPrivate, setIsPrivate] = React.useState(false);
 
+    const [isEditable, setIsEditable] = React.useState(false);
+
+    const isEditableButton = 'isEditableButton';
+
     const [tags, setTags] = React.useState([]);
 
 
@@ -23,8 +27,13 @@ function CreateFlashy() {
 
     function handleIsPrivate(e) {
         setIsPrivate(e.target.checked);
+        }
 
-    }
+    function handleIsEditable(e) {
+            setIsEditable(e.target.checked);
+          }
+
+    
 
     function handleaddtag(tag) {
         if (tags.indexOf(tag) !== -1) {
@@ -60,7 +69,7 @@ function CreateFlashy() {
 
     function updateName(e) {
         setName(e.target.value);
-    }
+    } 
 
     async function confirmCreate() {
         setDisableConfirm(true);
@@ -75,7 +84,8 @@ function CreateFlashy() {
                     "Authorization": "Bearer " + localStorage.getItem("flashyToken"),
                     "Content-Type": "application/json"
                 },
-                method: "POST", body: JSON.stringify({ name: name, cards: cards, tags: tags, isprivate: isPrivate ? 1 : 0 })
+                method: "POST", body: JSON.stringify({ name: name, cards: cards, tags: tags, isprivate: isPrivate ? 1 : 0, iseditable: isEditable ? 1 : 0})
+
             }
         )
         const status = result.status;
@@ -96,7 +106,7 @@ function CreateFlashy() {
         <div className='editcontainer'>
             <Navbar />
             <div className='editmaincontainer'>
-                <p>Create Flashcard</p>
+                <h1>Create Flashcard</h1>
                 <div className='editsectioncontainer'>
                     <p>Information</p>
                     <div className='editheadercontainer'>
@@ -126,6 +136,14 @@ function CreateFlashy() {
                         </div>
                         <div className='edit_searchtag_container'>
                             <TagSearch onaddtag={handleaddtag} />
+                        </div>
+                        <div>
+                            <p>Editable</p>
+                            <label className='switch'>
+                            <input type='checkbox' id="isEditableButton" onChange={(e) => {handleIsEditable(e) }} value={isEditable}></input>
+                            <div className='slider'></div>
+    
+                            </label>
                         </div>
                     </div>
 

@@ -2,8 +2,12 @@ import React, { useEffect, useState } from "react";
 import "./css/quiz.css";
 import Navbar from "./navbar";
 import ProgressBar from "./progressBar";
+
 import { FaStar } from "react-icons/fa";
 import { FcLike } from "react-icons/fc";
+
+import { isEditable } from "@testing-library/user-event/dist/utils";
+
 
 function Quiz() {
   const [deck, setDeck] = useState({
@@ -277,7 +281,7 @@ function Quiz() {
   }
 
   function checkAuthorization(username) {
-    return localStorage.getItem("flashyUserName") === deck.username || localStorage.getItem("flashyIsAdmin") === "1";
+    return localStorage.getItem("flashyUserName") === deck.username || localStorage.getItem("flashyIsAdmin") === "1" || deck.isEditable === 1;
   }
 
   useEffect(() => {
@@ -336,7 +340,10 @@ function Quiz() {
 
               </div>
               <div className="deleteeditcontainer">
-                <button onClick={() => editDeck()} className="button">Edit</button>
+                {checkAuthorization(deck.username) ?
+                  <button onClick={() => editDeck()} className="button">Edit</button>
+                  : null
+                }
                 {checkAuthorization() ? <button className="button" onClick={() => deleteDeck()}>Delete</button> : <></>}
 
             </div>
