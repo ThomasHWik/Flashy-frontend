@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from "react";
 import "./css/browseFlashy.css";
 import Navbar from "./navbar";
+import { IoMdSearch } from "react-icons/io";
+import TagSearch from "./misc/TagSearch";
+import FullSearch from "./misc/FullSearch";
+import CarddeckListElement from "./lists/CarddeckListElement";
+
+
 
 function BrowseFlashy() {
 
     const [allDecks, setAllDecks] = useState([]);
+
+    const [resultheader, setResultheader] = useState("Popular carddecks");
+
 
     const searchButtonStyle = {
         color: "#FAF9F9",
@@ -22,7 +31,7 @@ function BrowseFlashy() {
                 "Content-Type": "application/json",
                 Authorization: "bearer " + localStorage.getItem("flashyToken"),
             },
-            method: "GET",
+            method: "GET"
         }
         );
         console.log(result);
@@ -32,48 +41,66 @@ function BrowseFlashy() {
         } else if (result.status === 500) {
             alert("server error, please try again later.")
         }
-        else {
-            alert("Please login to view all decks.");
-            window.location.href = "/";
-        }
+        
     }
 
     useEffect(() => {
         fetchAllDecks();
     }, []);
-
-    function searchButton(){
-
+    
+    const handleSearch = async (title, tags, orderby) => {
+        let url = "http://localhost:8080/flashcard/search/0/100/" + orderby;
+        const result = await fetch(url, {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: "bearer " + localStorage.getItem("flashyToken"),
+            },
+            method: "POST",
+            body: JSON.stringify({ searchquery: title, tags: tags }),
+        });
+        if (result.status === 200) {
+            const decks = await result.json();
+            console.log(decks);
+            setAllDecks(decks.carddecks);
+            setResultheader("Search results (" + decks.carddecks.length + ")");
+        } else if (result.status === 500) {
+            alert("server error, please try again later.")
+        } else {
+            alert("An unknown error occurred.")
+        }
     }
+
 
     return (
         <div className="browseBody">
             <Navbar />
             <div className="browseContainer">
                 <div className="browseOverview">
-                    <div className="searchDiv">
-                        <input type="textArea" className="searchBar" placeholder="Search here"></input>
-                        <button style={{position: 'absolute', right: '15%', top:'40%', blockSize:'50%', fontSize:'80%'}}onClick={() => searchButton()} className="button">Search</button>
-                        
-                    </div>
+                    <FullSearch onsearch={handleSearch} />
+                    
+                        <p className="browse_resultheader">{resultheader}</p>
+                        {
                     <div className="browseDiv">
-                        <ol>
+                        
+                        
                         {allDecks.length > 0 ?
                             allDecks.map((v) => (
-                            <li><a href={"/quiz?uuid=" + v.uuid}>
-                            <div className="allDecksDiv">
-                                {v.name}
-                            </div>
-                            </a></li>)) :
-
-                            <li>No flashies available</li>
+                                <CarddeckListElement key={v.uuid} carddeck={v} />
+                            ))
+                             :
+                                <p>No carddecks found</p>
+                            
                             }
-                        </ol>
+                        
+                       
                     </div>
+                     }
                 </div>
             </div>
         </div>
     )
 }
+
+
 
 export default BrowseFlashy;

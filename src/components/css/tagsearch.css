@@ -1,13 +1,15 @@
-.tagsearch_container {
+.tagsearch_search {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 100% !important;
 
   
 }
 
 .tagsearch_search input {
+    margin: 0 !important;
     border: .5px solid !important; 
+   
 }
 
 .tagsearch_searchresult {
@@ -37,10 +39,11 @@
     width: 100%;
 
     align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.tagsearch_resultcontainer {
     flex-direction: row !important;
+    justify-content: start !important;
+
+    flex-wrap: wrap;
+
+    
+    
 }
