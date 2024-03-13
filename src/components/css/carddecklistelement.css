@@ -1,10 +1,10 @@
 .cdle_container {
-    width: 100%;
-    max-height: 90px;
-    min-height: 90px;
+    width: 100%;    
+    min-height: 70px;
     border-bottom: .5px solid;
    
     flex-grow: 1;
+    height: fit-content !important;
 
   
 }
@@ -18,7 +18,7 @@
     flex-direction: row;
     justify-content: space-between;
     
-    margin-bottom: 10px;
+    margin-bottom: 0px !important;
 
 
 }
@@ -48,7 +48,7 @@
     margin: 0;
     padding: 0;
     font-size: 13px;
-    ;
+    
 }
 
 .cdle_left_container > div:last-child {

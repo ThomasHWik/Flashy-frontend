@@ -1,0 +1,209 @@
+
+.fullsearch_searchDiv{
+   
+    background-color: #BEE3DB;
+
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 20px;
+
+
+
+}
+
+.fullsearch_searchDiv > div:first-child > p {
+    margin-top: 20px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #555B6E;
+    margin-bottom: -20px;
+}
+
+
+.fullsearch_searchDiv > div:first-child {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.fullsearch_searchDiv > div:first-child > span {
+       justify-self: center;
+       align-self: center;
+       margin-top: 20px;
+}
+
+.fullsearch_searchDiv > div:first-child:hover {
+    cursor: pointer;
+}
+
+
+.fullsearch_searchbottom {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+
+.fullsearch_searchbottom div {
+    width: 48%;
+    
+}
+
+.fullsearch_searchDiv > div {
+    width: 80%;
+}
+
+.fullsearch_searchDiv input, .fullsearch_searchDiv select {
+    border: .5px solid !important; 
+    padding: 10px;
+
+}
+
+.fullsearch_searchDiv select {
+    width : 100%;
+    background-color: #BEE3DB;
+
+    padding: 12px 20px;
+
+    display: inline-block;
+    border: none;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+.fullsearch_titlesearchdiv {
+    width: 80%;
+    margin-top: 20px;
+    
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    
+
+}
+
+
+.fullsearch_titlesearchdiv p {
+
+}
+
+.fullsearch_searchDiv .fullsearch_titlesearchdiv input {
+    margin: 0 auto;
+    background-color: #BEE3DB;
+    width: 100%;
+    padding: 12px 20px;
+
+    display: inline-block;
+    border: none;
+    box-sizing: border-box;
+    border-radius: 5px;
+
+    width: 100%;
+}
+
+
+.fullsearch_searchbtn{
+
+    margin-top: 20px;    
+ 
+    --border: 4px;
+    --slant: 0.5em;
+    --color: #555B6E;
+
+    font-size: 12px;
+    padding: 0.4em 1.2em;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--color);
+    background: linear-gradient(to bottom left, var(--color)  50%,#0000 50.1%) top right, linear-gradient(to top  right, var(--color)  50%,#0000 50.1%)bottom left;
+    background-size: calc(var(--slant) + 1.3*var(--border)) calc(var(--slant) + 1.3*var(--border));
+    background-repeat: no-repeat;
+    box-shadow:
+    0 0 0 200px inset var(--s,#0000),
+    0 0 0 var(--border) inset var(--color);
+    clip-path:
+        polygon(0 0, calc(100% - var(--slant)) 0, 100% var(--slant),
+            100% 100%, var(--slant) 100%,0 calc(100% - var(--slant))
+            );
+    transition: color var(--t,0.3s), background-size 0.3s;
+}
+
+button:focus-visible {
+    outline-offset: calc(-1*var(--border));
+    outline: var(--border) solid #000c;
+    clip-path: none;
+    background-size: 0 0;
+}
+button:hover,
+button:active{
+    background-size: 100% 100%;
+    color: #fff;
+    --t: 0.2s 0.1s;
+}
+button:active {
+    --s: #0005;
+    transition: none;
+}
+
+
+.fullsearch_chosentag {
+
+    margin: 5px;
+    
+
+    border-radius: 10px;
+    background-color: #BEE3DB;
+
+    display: flex;
+    flex-direction: row !important;
+    justify-content: center;
+    align-items: center;
+    
+
+    background-color: rgb(74, 216, 202) ;
+    width: fit-content;
+    padding: 0px !important;
+    max-width: fit-content;
+}
+.fullsearch_chosentag > .fullsearch_removetagicon:hover {
+    cursor: pointer;
+   
+}
+
+
+.fullsearch_chosentag > span {
+    margin: 5px;
+    padding: 0;
+
+}
+
+.fullsearch_currenttags_container {
+    justify-content: start !important;
+    display: flex;
+    flex-direction: row !important;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100% !important;
+
+}
+
+
+
+.fullsearch_currenttags_container > div {
+    display: flex;
+    flex-direction: row !important;
+    flex-wrap: wrap;
+}
+
+
+.fullsearch_searchtag_container > div {
+    width: 80%;
+
+}

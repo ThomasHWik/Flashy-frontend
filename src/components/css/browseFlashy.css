@@ -1,13 +1,14 @@
 .browseBody{
     background-color: #555B6E;
     width: 100%;
-    height: calc(100% - 90px);
+    min-height: calc(100% - 90px);
     display: flex;
 }
 
 .browseContainer{
-    width: 90%;
+    width: 80%;
     display: flex;
+    margin: 0 auto;
 }
 
 .browseOverview{
@@ -15,11 +16,13 @@
     margin: 20px;
     border-radius: 20px;
     height: 60%;
+    
 }
 
 .browseOverview h1{
     text-align: center;
     margin-top: 20px;
+   
     color: #FAF9F9;
 }
 
@@ -28,7 +31,7 @@
     background-color: #BEE3DB;
     margin: 20px;
     border-radius: 20px;
-    height: 60%;
+
     display: flex;
     flex-direction: column;
     min-height: 300px;
@@ -73,33 +76,9 @@
     border-bottom: 1px solid #FAF9F9;
 }
 
-.searchDiv{
-    flex: 1;
-    background-color: #BEE3DB;
-    margin: 20px;
-    border-radius: 20px;
-    height: 20%;
-    display: flex;
-    flex-direction: column;
-    min-height: 20px;
-    position: relative;
-    justify-content: 'space-between';
+.browse_resultheader {
+   text-align: center ;
+    font-size: 1.5em;
+    font-weight: bold;
 
-}
-
-.searchBar {
-    height: 70%;
-    width: 50%;
-    border-radius: 20px;
-    display: flex;
-    position: relative;
-    text-align: center; 
-    justify-content: center;
-    margin: 0 auto;   
-    margin-top: 0.5%;
-    margin-bottom: 0.5%;
-}
-
-.searchButton{
-    text-align: right;
 }
