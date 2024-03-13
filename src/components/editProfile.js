@@ -38,12 +38,14 @@ function EditProfile() {
 
     
     }
+}
     const handleEnter = (e) => {
         if (e.key === "Enter") {
             sendUser()
             console.log("Enter pressed")
 
         }
+    }
 
     async function sendUser() {
         
