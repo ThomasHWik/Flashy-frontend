@@ -35,7 +35,7 @@ function CreateUser() {
             localStorage.setItem("flashyUserName", name)
             localStorage.setItem("flashyToken", parsed.message)
             localStorage.setItem("flashyIsAdmin", parsed.isadmin)
-            window.location.href = "/home"
+            window.location.href = "/profile"
         } else {
             setMessage("Invalid username")
         }

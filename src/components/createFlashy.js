@@ -92,7 +92,7 @@ function CreateFlashy() {
         console.log(result)
 
         if (status === 200) {
-            window.location.href = "/home"
+            window.location.href = "/profile"
         } else {
             alert("You are not authorized to create flashcard.");
             window.location.href = "/";

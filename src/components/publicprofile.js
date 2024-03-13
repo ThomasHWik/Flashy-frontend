@@ -29,10 +29,10 @@ const PublicProfile = () => {
 
         } else if (result.status === 500) {
             alert("A server error ocurred");
-            window.location.href = "/home";
+            window.location.href = "/profile";
         } else {
             alert("User not found");
-            window.location.href = "/home";
+            window.location.href = "/profile";
         }
 
     }

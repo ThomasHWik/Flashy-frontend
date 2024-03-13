@@ -271,7 +271,7 @@ function Quiz() {
 
 
     if (result.status === 200) {
-      window.location.href = "/home";
+      window.location.href = "/profile";
     } else if (result.status === 403) {
       alert("You are not authorized to delete this deck. Please log in as an authorized user.");
       window.location.href = "/";
