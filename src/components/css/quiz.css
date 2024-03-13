@@ -1,7 +1,7 @@
 .quizBody{
     display: flex;
     width: 100%;
-    height: calc(100vh - 90px);
+    min-height: calc(100vh - 90px);
 }
 
 .containerQuiz {

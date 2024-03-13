@@ -304,15 +304,29 @@ function Quiz() {
         <div className="divBtn">
             <button style={buttonEmojiStyle} onClick={() => startOfDeck()}>⏮️</button>
 
-            <button style={buttonEmojiStyle} onClick={() => previousCard()}>⬅️</button>
+            <button style={buttonEmojiStyle} onClick={() => previousCard()}>
+              ⬅️
+            </button>
 
-            <button style={buttonEmojiStyle} onClick={() => likeDeck()}>{isLiked ? '♥︎' : '♡'}</button>
+            <div className={!isLiked ? "outline-iconheart" : ""}>
+              <FcLike cursor={"pointer"} size={30}   onClick={() => likeDeck()} />
+            </div>
+  
+    
+            <button style={buttonEmojiStyle} onClick={() => shuffleDeck()}>
+              🔃
+            </button>
+        
+          
+            <div className={!isFavorite ? "outline-iconstar" : ""}>
+            <FaStar cursor={"pointer"}  size={30} color={isFavorite ? "#E3C565" : "gray"}   onClick={() => favoriteDeck()} />
+          </div>
+    
 
-            <button style={buttonEmojiStyle} onClick={() => shuffleDeck()}>🔃</button>
-
-            <button style={buttonEmojiStyle} onClick={() => favoriteDeck()}>{isFavorite ?  '★' : '☆'}</button>
+ 
 
             <button disabled={loadingDelete} style={buttonEmojiStyle} onClick={() => nextCard()}>➡️</button>
+
 
             <button disabled={loadingDelete} style={buttonEmojiStyle} onClick={() => endOfDeck()}>⏭️</button>
         </div>
