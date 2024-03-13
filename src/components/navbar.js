@@ -14,7 +14,7 @@ function Navbar(props) {
         <div className="nav">
             <a href="createFlashy">Create Flashy</a>
             <a href="browseFlashy">Browse Flashy</a>
-            <a href="home">Profile</a>
+            <a href="profile">Profile</a>
 
 
 

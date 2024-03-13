@@ -54,7 +54,7 @@ function Login() {
             localStorage.setItem("flashyUserName", name)
             localStorage.setItem("flashyToken", parsed.message)
             localStorage.setItem("flashyIsAdmin", parsed.isadmin)
-            window.location.href = "/home"
+            window.location.href = "/browseFlashy"
         } else {
             setMessage("Wrong username or password :(")
         }
