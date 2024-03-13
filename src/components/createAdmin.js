@@ -17,6 +17,13 @@ function CreateAdmin() {
         setUserPassword(e.target.value)
     }
 
+    const handleEnter = (e) => {
+      if (e.key === "Enter") {
+          sendCreateAdmin()
+          console.log("Enter pressed")
+      }
+    }
+
     async function deleteAdmin(adminName){
       const result = await fetch("http://localhost:8080/user/delete/"+adminName,
       {
@@ -105,9 +112,9 @@ function CreateAdmin() {
         <div className="create-new-admin">
           <h2>Create new admin</h2>
             <label htmlFor="username">Username:</label>
-            <input onChange={(e)=>handleUserName (e)} type="text" id="username" name="username" />
+            <input onKeyDown={handleEnter} onChange={(e)=>handleUserName (e)} type="text" id="username" name="username" />
             <label htmlFor="password">Password:</label>
-            <input onChange={(e)=>handlePassword (e)} type="password" id="password" name="password" />
+            <input onKeyDown={handleEnter} onChange={(e)=>handlePassword (e)} type="password" id="password" name="password" />
             <button className="btnCreateAdmin" onClick={() => sendCreateAdmin()}>Create Admin</button>
         </div>
       </div>

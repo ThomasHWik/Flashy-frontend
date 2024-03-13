@@ -3,7 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import BrowseFlashy from './components/browseFlashy';
 import Header from './components/header';
-import Home from './components/home';
+import Profile from './components/profile';
 import CreateFlashy from './components/createFlashy';
 import Login from './components/login';
 import CreateUser from './components/createUser';
@@ -24,10 +24,10 @@ function App() {
               <BrowseFlashy />
             </>
           } />
-          <Route path="/home" element={
+          <Route path="/profile" element={
             <>
               <Header header="Flashy!" />
-              <Home />
+              <Profile />
             </>
           } />
           <Route path="/" element={

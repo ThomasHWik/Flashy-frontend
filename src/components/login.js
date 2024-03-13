@@ -15,6 +15,13 @@ function Login() {
         setUserPassword(e.target.value)
     }
 
+    const handleEnter = (e) => {
+        if (e.key === "Enter") {
+            sendLogin()
+            console.log("Enter pressed")
+        }
+    }
+
     const buttonStyle = {
         color: "#FAF9F9",
         backgroundColor: '#555B6E',
@@ -47,7 +54,7 @@ function Login() {
             localStorage.setItem("flashyUserName", name)
             localStorage.setItem("flashyToken", parsed.message)
             localStorage.setItem("flashyIsAdmin", parsed.isadmin)
-            window.location.href = "/home"
+            window.location.href = "/browseFlashy"
         } else {
             setMessage("Wrong username or password :(")
         }
@@ -58,8 +65,8 @@ function Login() {
 
             <div className="login">
                 <h1>Flashy login</h1>
-                <p>Username: <input onChange={(e)=>handleUserName (e)} type="text"></input></p>
-                <p>Password: <input onChange={(e)=>handlePassword(e)} type={"password"}></input></p>
+                <p>Username: <input onKeyDown={handleEnter} onChange={(e)=>handleUserName (e)} type="text"></input></p>
+                <p>Password: <input onKeyDown={handleEnter} onChange={(e)=>handlePassword(e)} type={"password"}></input></p>
                 <button className="btnLogin"  onClick={() => sendLogin()}>Log in</button>
                 <p>{message}</p>
                 <a href="/createUser">

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import "./css/home.css";
+import "./css/profile.css";
 import Navbar from "./navbar";
 import { Link } from "react-router-dom";
 import CarddeckListElement from "./lists/CarddeckListElement";
 
-function Home() {
+function Profile() {
   const [userDecks, setUserDecks] = useState([]);
   const [favoriteDecks, setFavoriteDecks] = useState([]);
   const [popup, setPopup] = useState("");
@@ -114,4 +114,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Profile;

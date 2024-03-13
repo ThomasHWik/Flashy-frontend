@@ -15,6 +15,7 @@ function EditProfile() {
         setPassword(e.target.value)
     }
 
+
     async function deleteAccount() {
         const result = await fetch("http://localhost:8080/user/delete/" + localStorage.getItem("flashyUserName"),
             {
@@ -34,8 +35,15 @@ function EditProfile() {
             window.location.href = "/"
         } else {
             alert("Something went wrong.")
-        }
+
+    
     }
+    const handleEnter = (e) => {
+        if (e.key === "Enter") {
+            sendUser()
+            console.log("Enter pressed")
+
+        }
 
     async function sendUser() {
         
@@ -82,7 +90,7 @@ function EditProfile() {
                         Change Username:
                         <br></br>
                         <br></br>    
-                        <input type="text" value={username} placeholder="Enter new username" onChange={(e)=>handleUserName (e)} ></input>
+                        <input onKeyDown={handleEnter} type="text" value={username} placeholder="Enter new username" onChange={(e)=>handleUserName (e)} ></input>
                     </label>
                 </div>
                 <div className="changePassword">
@@ -90,7 +98,7 @@ function EditProfile() {
                         Change Password:  
                         <br></br>
                         <br></br>
-                        <input type="text" placeholder="Enter new password" value={password} onChange={(e)=>handlePassword (e)}></input>                    </label>
+                        <input onKeyDown={handleEnter} type="text" placeholder="Enter new password" value={password} onChange={(e)=>handlePassword (e)}></input>                    </label>
                 </div>
                 <button className="saveChangesButton" value={password} onClick={() => sendUser()}>Save changes</button>
            

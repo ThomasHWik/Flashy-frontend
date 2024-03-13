@@ -3,10 +3,17 @@ import "./css/quiz.css";
 import Navbar from "./navbar";
 import ProgressBar from "./progressBar";
 
+import { FaStar } from "react-icons/fa";
+import { FcLike } from "react-icons/fc";
+
+import { isEditable } from "@testing-library/user-event/dist/utils";
+
+
 function Quiz() {
   const [deck, setDeck] = useState({
     name: "",
     cards: [{ question: "", answer: "" }],
+    tags: [],
   });
 
   const [showAnswer, setShowAnswer] = useState(0);
@@ -22,6 +29,8 @@ function Quiz() {
   const [isLiked, setIsLiked] = useState(false);
 
   const [likes, setLikes] = useState(0);
+  const [favorites, setFavorites] = useState(0);
+
 
   function markAsDifficult() {
     setDeck((currentDeck) => {
@@ -93,6 +102,7 @@ function Quiz() {
     setIsFavorite(decks.isfavorited);
     setIsLiked(decks.isliked);
     setLikes(decks.likecount);
+    setFavorites(decks.favoritecount);
 
     setComments(decks.comments);
 
@@ -169,12 +179,14 @@ function Quiz() {
         }
       );
       console.log(result);
-      if (result.status === 200) {
-        alert("Deck added to favorites");
+        if (result.status === 200) {
         setIsFavorite(true);
-      } else {
-        alert("An error occurred.  mip Please try again.");
+        setFavorites(favorites + 1);
       }
+        else{
+          alert("An error occurred. Please try again.");
+        }
+     
     }
     else{
       const result = await fetch(
@@ -188,8 +200,10 @@ function Quiz() {
         }
       );
       if (result.status === 200) {
-        alert("Deck removed from favorites");
+       
         setIsFavorite(false);
+        setFavorites(favorites - 1);
+
       } else {
         alert("An error occurred. Please try again.");
       }
@@ -267,7 +281,7 @@ function Quiz() {
   }
 
   function checkAuthorization(username) {
-    return localStorage.getItem("flashyUserName") === deck.username || localStorage.getItem("flashyIsAdmin") === "1";
+    return localStorage.getItem("flashyUserName") === deck.username || localStorage.getItem("flashyIsAdmin") === "1" || deck.isEditable === 1;
   }
 
   useEffect(() => {
@@ -314,11 +328,22 @@ function Quiz() {
         <ProgressBar current={currentCardIndex} total={deck.cards.length} /> {/* ProgressBar component is placed here */}
           <div className="gamecontainer">
             <div className="infoBox">
-              <h3>{deck.name}</h3>
-              <p>Made by: <span style={{ fontWeight: "bold" }}>{deck.username}</span></p>
+              <p style={{fontWeight: "bold"}}>{deck.name}</p>
+              <p>Made by: <span style={{ fontWeight: "bold" }}><a style={{color: "black", textDecoration: "none"}} href={"/publicprofile?u="+deck.username}>@{deck.username}</a></span></p>
               <p>Cards: <span style={{ fontWeight: "bold" }}>{deck.cards.length}</span></p>
+              <p>Likes: <span style={{ fontWeight: "bold" }}>{likes}</span></p>
+              <p>Favorites: <span style={{ fontWeight: "bold" }}>{favorites}</span></p>
+              <div className="quiz_tagscontainer" style={{display:"flex", flexWrap:"wrap"}}>
+             {deck.tags.map((tag, index) => (
+                  <span className="quiz_tags" key={index}>{tag}</span>
+                ))}
+
+              </div>
               <div className="deleteeditcontainer">
-                <button onClick={() => editDeck()} className="button">Edit</button>
+                {checkAuthorization(deck.username) ?
+                  <button onClick={() => editDeck()} className="button">Edit</button>
+                  : null
+                }
                 {checkAuthorization() ? <button className="button" onClick={() => deleteDeck()}>Delete</button> : <></>}
 
             </div>
@@ -344,43 +369,46 @@ function Quiz() {
 
         <div className="divBtn">
 
-        <p className="buttonFirst">
+
             <button style={buttonEmojiStyle} onClick={() => startOfDeck()}>
               ⏮️
             </button>
-          </p>
 
-          <p className="buttonBack">
+
+
             <button style={buttonEmojiStyle} onClick={() => previousCard()}>
               ⬅️
             </button>
-          </p>
 
-          <p className="buttonLike">
-            <button style={buttonEmojiStyle} onClick={() => likeDeck()}>{isLiked ? '♥︎' : '♡'}</button>
-          </p>
 
-          <p className="buttonShuffle">
+       
+            <div className={!isLiked ? "outline-iconheart" : ""}>
+              <FcLike cursor={"pointer"} size={30}   onClick={() => likeDeck()} />
+            </div>
+        
+
+    
             <button style={buttonEmojiStyle} onClick={() => shuffleDeck()}>
               🔃
             </button>
-          </p>
+        
+          
+            <div className={!isFavorite ? "outline-iconstar" : ""}>
+            <FaStar cursor={"pointer"}  size={30} color={isFavorite ? "#E3C565" : "gray"}   onClick={() => favoriteDeck()} />
+          </div>
+    
 
-          <p className="buttonFavourite">
-            <button className="btnFav" style={buttonEmojiStyle} onClick={() => favoriteDeck()}>{isFavorite ?  '★' : '☆'}</button>
-          </p>
-
-          <p className="buttonNext">
+   
             <button disabled={loadingDelete} style={buttonEmojiStyle} onClick={() => nextCard()}>
               ➡️
             </button>
-          </p>
+        
 
-          <p className="buttonLast">
+      
             <button disabled={loadingDelete} style={buttonEmojiStyle} onClick={() => endOfDeck()}>
               ⏭️
             </button>
-          </p>
+ 
 
         </div>
       </div>
@@ -390,5 +418,7 @@ function Quiz() {
     </div>
   );
 }
+
+
 
 export default Quiz;
