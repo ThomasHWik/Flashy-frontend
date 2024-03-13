@@ -21,7 +21,7 @@ function BrowseFlashy() {
         fontSize: "20px",
         fontFamily: "Lucida Sans",
         cursor: "pointer",
-      };
+    };
 
     async function fetchAllDecks() {
         const result = await fetch(
