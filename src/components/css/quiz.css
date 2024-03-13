@@ -24,6 +24,7 @@
     gap: 40px;
     justify-content: center;
     align-items: center;
+    padding: 25px 0;
 }
 
 .quizBox {
@@ -159,6 +160,7 @@
     transition: none;
 }
 
+
 .commentButton {
     position: relative;
 
@@ -272,3 +274,4 @@
     padding: 4px;
     text-align: center;
 }
+

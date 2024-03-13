@@ -7,7 +7,7 @@ function Header(props) {
         <div className="header">
             <h1>{props.header}</h1>
             <div className="divider">
-                <a className="homeLink" href="home">
+                <a className="homeLink" href="/browseFlashy">
                     <img className="logo" src={logo} alt="not suppoerted"/>
                 </a>
             </div>
