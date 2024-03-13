@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import './css/edit.css'
 import Navbar from './navbar'
-import { isEditable } from '@testing-library/user-event/dist/utils';
 import TagSearch from './misc/TagSearch'
 import { IoIosRemoveCircle } from "react-icons/io";
 import './css/tagsearch.css';

@@ -18,8 +18,6 @@ function CreateFlashy() {
 
     const [isEditable, setIsEditable] = React.useState(false);
 
-    const isEditableButton = 'isEditableButton';
-
     const [tags, setTags] = React.useState([]);
 
 
@@ -27,19 +25,19 @@ function CreateFlashy() {
 
     function handleIsPrivate(e) {
         setIsPrivate(e.target.checked);
-        }
+    }
 
     function handleIsEditable(e) {
-            setIsEditable(e.target.checked);
-          }
+        setIsEditable(e.target.checked);
+    }
 
-    
+
 
     function handleaddtag(tag) {
         if (tags.indexOf(tag) !== -1) {
             return;
         } else {
-        setTags([...tags, tag]);
+            setTags([...tags, tag]);
         }
     }
 
@@ -69,7 +67,7 @@ function CreateFlashy() {
 
     function updateName(e) {
         setName(e.target.value);
-    } 
+    }
 
     async function confirmCreate() {
         setDisableConfirm(true);
@@ -84,7 +82,7 @@ function CreateFlashy() {
                     "Authorization": "Bearer " + localStorage.getItem("flashyToken"),
                     "Content-Type": "application/json"
                 },
-                method: "POST", body: JSON.stringify({ name: name, cards: cards, tags: tags, isprivate: isPrivate ? 1 : 0, iseditable: isEditable ? 1 : 0})
+                method: "POST", body: JSON.stringify({ name: name, cards: cards, tags: tags, isprivate: isPrivate ? 1 : 0, iseditable: isEditable ? 1 : 0 })
 
             }
         )
@@ -122,14 +120,22 @@ function CreateFlashy() {
                                     <div className='slider'></div>
                                 </label>
                             </div>
+                            <div>
+                                <p>Editable</p>
+                                <label className='switch'>
+                                    <input type='checkbox' onChange={(e) => { handleIsEditable(e) }} value={isEditable}></input>
+                                    <div className='slider'></div>
+
+                                </label>
+                            </div>
                         </div>
                         <p className='edit_tagheader'>Tags</p>
                         <div className='edit_currenttags_container'>
-        
+
                             <div>
                                 {tags.map((tag) => {
                                     return <div className='edit_chosentag' key={tag}>
-                                <IoIosRemoveCircle className='edit_removetagicon' color='#bb1818' onClick={() => setTags([...tags.filter(x => x !== tag)])} /> <span>{tag}</span>
+                                        <IoIosRemoveCircle className='edit_removetagicon' color='#bb1818' onClick={() => setTags([...tags.filter(x => x !== tag)])} /> <span>{tag}</span>
                                     </div>
                                 })}
                             </div>
@@ -137,20 +143,10 @@ function CreateFlashy() {
                         <div className='edit_searchtag_container'>
                             <TagSearch onaddtag={handleaddtag} />
                         </div>
-                        <div>
-                            <p>Editable</p>
-                            <label className='switch'>
-                            <input type='checkbox' id="isEditableButton" onChange={(e) => {handleIsEditable(e) }} value={isEditable}></input>
-                            <div className='slider'></div>
-    
-                            </label>
-                        </div>
                     </div>
 
 
                 </div>
-
-
 
                 <div className='editsectioncontainer'>
                     <p>Flashcards</p>
