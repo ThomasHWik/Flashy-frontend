@@ -1,5 +1,4 @@
 .browseBody{
-    background-color: #555B6E;
     width: 100%;
     min-height: calc(100% - 90px);
     display: flex;
@@ -22,8 +21,6 @@
 .browseOverview h1{
     text-align: center;
     margin-top: 20px;
-   
-    color: #FAF9F9;
 }
 
 .browseDiv{

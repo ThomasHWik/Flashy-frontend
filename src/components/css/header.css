@@ -15,6 +15,7 @@
 .header h1{
     text-align: center;
     flex-grow: 1;
+    color: #555b65;
 }
 .logo {
     height: 115%;
