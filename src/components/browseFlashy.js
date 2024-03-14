@@ -78,7 +78,7 @@ function BrowseFlashy() {
                 <div className="browseOverview">
                     <FullSearch onsearch={handleSearch} />
                     
-                        <p className="browse_resultheader">{resultheader}</p>
+                        <h1 className="browse_resultheader">{resultheader}</h1>
                         {
                     <div className="browseDiv">
                         

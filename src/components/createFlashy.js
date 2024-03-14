@@ -106,7 +106,7 @@ function CreateFlashy() {
             <div className='editmaincontainer'>
                 <h1>Create Flashcard</h1>
                 <div className='editsectioncontainer'>
-                    <p>Information</p>
+                    <h2>Information</h2>
                     <div className='editheadercontainer'>
                         <div>
                             <div>
