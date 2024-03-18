@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import './css/edit.css'
 import { Checkbox } from "@mui/material";
 import Navbar from './navbar'
 import TagSearch from './misc/TagSearch'
 import { IoIosRemoveCircle } from "react-icons/io";
+import { CiImageOn } from "react-icons/ci";
+
 
 
 function CreateFlashy() {
@@ -41,9 +43,32 @@ function CreateFlashy() {
         }
     }
 
-    function setCardValue(question, answer, index) {
+    async function fileToBase64(file) {
+
+        function getBase64(file2) {
+            const reader = new FileReader()
+            return new Promise(resolve => {
+                reader.onload = ev => {
+                    resolve(ev.target.result)
+                }
+                reader.readAsDataURL(file2)
+            })
+        }
+
+
+        let promise = getBase64(file)
+
+
+        return await Promise.resolve(promise);
+    }
+
+    async function setCardValue(question, answer, index, uploadedQFile, uploadedAFile) {
         let temp = questions;
-        temp[index] = [question, answer];
+        console.log(uploadedAFile)
+
+
+
+        temp[index] = [question, answer, uploadedQFile, uploadedAFile];
         setQuestions(temp);
         console.log(temp);
     }
@@ -63,7 +88,7 @@ function CreateFlashy() {
         setQuestions(temp);
     }
 
-    const [name, setName] = React.useState([]);
+    const [name, setName] = React.useState("");
 
     function updateName(e) {
         setName(e.target.value);
@@ -72,10 +97,21 @@ function CreateFlashy() {
     async function confirmCreate() {
         setDisableConfirm(true);
         let cards = [];
-        questions.forEach((card) => {
-            cards.push({ question: card[0], answer: card[1] });
-        });
+        for (let i = 0; i < questions.length; i++) {
+            let qimage = null;
+            let aimage = null;
+            if (questions[i][2] != null && questions[i][2] != "") {
+                qimage = await fileToBase64(questions[i][2]);
+            }
 
+            if (questions[i][3] != null && questions[i][3] != "") {
+                console.log("AIMAGE")
+                aimage = await fileToBase64(questions[i][3]);
+            }
+            cards.push({ question: questions[i][0], answer: questions[i][1], imagequestion: qimage, imageanswer: aimage });
+        }
+
+        console.log(JSON.stringify({ name: name, cards: cards, tags: tags, isprivate: isPrivate ? 1 : 0, iseditable: isEditable ? 1 : 0 }))
         const result = await fetch("http://localhost:8080/flashcard/create",
             {
                 headers: {
@@ -170,27 +206,59 @@ const Box = (props) => {
     const [question, setQuestion] = React.useState(props.question || '');
     const [answer, setAnswer] = React.useState(props.answer || '');
 
+    const [uploadedQFile, setUploadedQFile] = useState(null);
+    const [uploadedAFile, setUploadedAFile] = useState(null);
+
+    const [showQImage, setShowQImage] = useState(false);
+    const [showAImage, setShowAImage] = useState(false);
+
+    const qImageInputRef = useRef();
+    const aImageInputRef = useRef();
+
+    const handleQFileUpload = (e) => {
+        setUploadedQFile(e.target.files[0]);
+        update(question, answer, e.target.files[0], uploadedAFile);
+    }
+
+    const removeQFile = () => {
+        setUploadedQFile(null);
+        update(question, answer, null, uploadedAFile);
+        qImageInputRef.current.value = "";
+    }
+
+    const handleAFileUpload = (e) => {
+        setUploadedAFile(e.target.files[0]);
+        update(question, answer, uploadedQFile, e.target.files[0]);
+    }
+
+    const removeAFile = () => {
+        setUploadedAFile(null);
+        update(question, answer, uploadedQFile, null);
+        aImageInputRef.current.value = "";
+    }
 
     useEffect(() => {
         setQuestion(props.question || '');
         setAnswer(props.answer || '');
+        setUploadedQFile(null);
+        setUploadedAFile(null);
     }, [props.question, props.answer]);
 
 
-    function update(question, answer) {
-        props.updateFunc(question, answer, props.index);
+    function update(question, answer, uploadedQFile, uploadedAFile) {
+        props.updateFunc(question, answer, props.index, uploadedQFile, uploadedAFile);
     }
 
     function updateQuestion(e) {
 
         setQuestion(e.target.value);
-        update(e.target.value, answer);
+        update(e.target.value, answer, uploadedQFile, uploadedAFile);
     }
 
     function updateAnswer(e) {
 
         setAnswer(e.target.value);
-        update(question, e.target.value);
+        update(question, e.target.value, uploadedQFile, uploadedAFile);
     }
 
     return (
@@ -199,13 +267,40 @@ const Box = (props) => {
                 <button className="editdeletecardbtn" onClick={() => props.deleteCard(props.index)}>Delete</button>
                 <div className='question'>
                     <textarea rows={10} placeholder='Question' onInput={(e) => updateQuestion(e)} value={question} />
+                    <div className='edit_boximagecontainer'>
+                        <div className='edit_boximagepopup' style={{ display: showQImage ? "flex" : "none" }}>
+                            <img src={uploadedQFile ? URL.createObjectURL(uploadedQFile) : ''} />
+                        </div>
+                        {uploadedQFile ?
+                            <CiImageOn onMouseEnter={() => setShowQImage(true)} onMouseLeave={() => setShowQImage(false)} size={25} className='edit_boximageicon' />
+                            : null}
+
+                        <input accept='image/jpeg' type='file' style={{display: "none"}} ref={qImageInputRef} className='qImageInput' onChange={handleQFileUpload} />
+                        <button  onClick={() => qImageInputRef.current.click()}>Choose image</button>
+                        
+                       {uploadedQFile ? <button className='edit_removefilebtn' onClick={removeQFile}>Remove image</button> : null}
+                    </div>
                 </div>
                 <div className='editverticalline'></div>
                 <div className='answer'>
                     <textarea rows={10} placeholder='Answer' onInput={(e) => updateAnswer(e)} value={answer} />
+                    <div className='edit_boximagecontainer'>
+
+                        <div className='edit_boximagepopup' style={{ display: showAImage ? "flex" : "none" }}>
+                            <img src={uploadedAFile ? URL.createObjectURL(uploadedAFile) : ''} />
+                        </div>
+                        {uploadedAFile ?
+                            <CiImageOn onMouseEnter={() => setShowAImage(true)} onMouseLeave={() => setShowAImage(false)} size={25} className='edit_boximageicon' />
+                            : null}
+                        <input accept='image/jpeg' type='file' style={{display: "none"}} ref={aImageInputRef} className='aImageInput' onChange={handleAFileUpload} />
+                        <button  onClick={() => aImageInputRef.current.click()}>Choose image</button>
+                        {uploadedAFile ? <button className='edit_removefilebtn' onClick={removeAFile}>Remove image</button> : null}
+                    </div>
+
                 </div>
             </div>
         </div>
+
     )
 }
 

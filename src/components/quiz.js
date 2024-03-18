@@ -15,6 +15,8 @@ function Quiz() {
     tags: [],
   });
 
+
+  const [currImage, setCurrImage] = useState("");
   const [showAnswer, setShowAnswer] = useState(0);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
 
@@ -58,11 +60,49 @@ function Quiz() {
     setLikes(decks.likecount);
     setFavorites(decks.favoritecount);
 
+    let cardcopy = [];
+    // get images
+    for (let i = 0; i < decks.cards.length; i++) {
+      let card= decks.cards[i];
+      if (card.imagequestion != null) {
+        const qimage = await getImage(card.uuid, "q");
+        card.qimage = qimage;
+      }
+      if (card.imageanswer != null) {
+      const aimage = await getImage(card.uuid, "a");
+      card.aimage = aimage;
+      }
+      cardcopy.push(card);
+      setDeck((currentDeck) => {
+        return { ...currentDeck, cards: cardcopy };
+      });
+    }
     } else {
       alert("You are not authorized to view this deck.");
       window.location.href = "/";
     }
   }
+
+
+
+  async function getImage(uuid, type) {
+    console.log("http://localhost:8080/image/" + uuid + "__" + type);
+    let res = await fetch("http://localhost:8080/image/" + uuid + "__" + type);
+    if (res.status === 200) {
+     
+      let base64String = await res.text();
+
+      const imageSrc = `${base64String}`;
+  
+   
+      return imageSrc;
+    } else {
+      return "";
+    }
+    
+    
+  }
+ 
 
 
   // shuffle the flashcard deck
@@ -217,6 +257,22 @@ function Quiz() {
     return localStorage.getItem("flashyUserName") === username || localStorage.getItem("flashyIsAdmin") == "1" || isEditable == "1";
   }
 
+  function getImageElement() {
+    if (showAnswer) {
+      if (deck.cards[currentCardIndex].imageanswer != null) {
+        return <img src={deck.cards[currentCardIndex].aimage} alt="" className="quiz_flashcardimage" />;
+      } 
+    } 
+    else {
+      if (deck.cards[currentCardIndex].imagequestion != null) {
+        return <img src={deck.cards[currentCardIndex].qimage} alt="" className="quiz_flashcardimage" />;
+      }
+    }
+
+    return null;
+  }
+
+
   useEffect(() => {
     fetchFlashyInfo();
   }, []);
@@ -291,6 +347,8 @@ function Quiz() {
 
             <p className="cardText">
               <span>#{currentCardIndex+1}</span>
+            {deck.cards.length > 0 ? getImageElement() : null}
+            
               {deck.cards.length > 0 ? showAnswer
                 ? deck.cards[currentCardIndex].answer
                 : deck.cards[currentCardIndex].question : "This deck is empty"
