@@ -105,9 +105,9 @@ function CreateAdmin() {
         <div className="create-new-admin">
           <h2>Create new admin</h2>
             <label htmlFor="username">Username:</label>
-            <input onKeyDown={handleEnter} onChange={(e)=>handleUserName (e)} type="text" id="username" name="username" />
+            <input className="inputChangeAdmin" onKeyDown={handleEnter} onChange={(e)=>handleUserName (e)} type="text" id="username" name="username" />
             <label htmlFor="password">Password:</label>
-            <input onKeyDown={handleEnter} onChange={(e)=>handlePassword (e)} type="password" id="password" name="password" />
+            <input className="inputChangeAdmin" onKeyDown={handleEnter} onChange={(e)=>handlePassword (e)} type="password" id="password" name="password" />
             <button className="btnCreateAdmin" onClick={() => sendCreateAdmin()}>Create Admin</button>
         </div>
       </div>
