@@ -92,15 +92,16 @@ function EditProfile() {
                         Change Username:
                         <br></br>
                         <br></br>    
-                        <input onKeyDown={handleEnter} type="text" value={username} placeholder="Enter new username" onChange={(e)=>handleUserName (e)} ></input>
+                        <input className="inputChangeAdmin" onKeyDown={handleEnter} type="text" value={username} placeholder="Enter new username" onChange={(e)=>handleUserName (e)} ></input>
                     </label>
                 </div>
+
                 <div className="changePassword">
                     <label>
                         Change Password:  
                         <br></br>
                         <br></br>
-                        <input onKeyDown={handleEnter} type="text" placeholder="Enter new password" value={password} onChange={(e)=>handlePassword (e)}></input>                    </label>
+                        <input className="inputChangeAdmin" onKeyDown={handleEnter} type="text" placeholder="Enter new password" value={password} onChange={(e)=>handlePassword (e)}></input>                    </label>
                 </div>
                 <button className="saveChangesButton" value={password} onClick={() => sendUser()}>Save changes</button>
            

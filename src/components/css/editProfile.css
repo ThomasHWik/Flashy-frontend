@@ -44,6 +44,7 @@ input[type="text"], input[type="password"] {
     text-align: center;
     margin-top: 30px;
     margin-bottom: 40px;
+
 }
 
 .changePassword {
@@ -133,4 +134,13 @@ input[type="text"], input[type="password"] {
             );
     transition: color var(--t,0.3s), background-size 0.3s;
 
+    }
+
+    .inputChangeAdmin{
+        text-align: center;
+        margin-top: 10%;
+        margin-bottom: 15%;
+        height: 45%;
+        border: 1px solid #000 !important;
+        padding: 10px !important;
     }
