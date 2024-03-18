@@ -245,9 +245,9 @@ function Edit() {
             <Navbar />
             <div className='editmaincontainer'>
                 <h1>Edit Flashcard - <span style={{ fontWeight: "bold" }}>{initialDeck.name}</span></h1>
-                <span><h3>Made by: {initialDeck.username}</h3></span>
+                <span>Made by: {initialDeck.username}</span>
                 <div className='editsectioncontainer'>
-                    <h2>Information</h2>
+                    <p>Information</p>
                     <div className='editheadercontainer'>
                         <div>
                             <div>
@@ -291,20 +291,7 @@ function Edit() {
                             <TagSearch onaddtag={handleaddtag} />
                         </div>
                     </div>
-                    <div className='edit_searchtag_container'>
-                        <TagSearch onaddtag={handleaddtag} />
-                    </div>
-                </div>
-            </div>
-
-            <div className='editsectioncontainer'>
-                <p>Flashcards</p>
-                <div className='editboxescontainer'>
-                    {questions.map((i, v) => { return <Box key={v} question={i[0]} getValues={getValues} answer={i[1]} updateFunc={setCardValue} index={v} deleteCard={deleteCard} /> })}
-                    <div className='editaddCard' onClick={addCard}>
-                        <p className="editaddcardbtn">+</p>
-                    </div>
-                </div>
+       
 
                 <div className='editsectioncontainer'>
                     <p>Flashcards</p>
@@ -314,7 +301,7 @@ function Edit() {
                             <h3 className="editaddcardbtn">+</h3>
                         </div>
                     </div>
-
+                    </div>
                 </div>
                 <div className='confirmeditcontainer'>
                     <button disabled={disableConfirm} onClick={() => confirmEdit()}>Confirm edit</button>
