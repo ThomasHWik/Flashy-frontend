@@ -165,9 +165,6 @@ button:active {
     background-color: #BEE3DB;
     border: .5px solid;
     flex-direction: row;
-
-
-
 }
 
 .editheadercontainer>div{
@@ -183,7 +180,6 @@ button:active {
 
 
     display: flex;
-    flex-direction: column;
     font-size: large;
     padding-bottom: 20px;
 
@@ -199,6 +195,9 @@ button:active {
     padding: 5px;
     border-radius: 5px;
     border: .5px solid;
+    height: 30px;
+    margin-left: 10px;
+    margin-top: 10px;
 }
 
 .editsectioncontainer {
@@ -463,6 +462,13 @@ input:checked + .slider:before {
 .edit_removefilebtn {
     min-width: 100px;
 
+}
+
+.editSwitchContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
 }
 
 input[type="file"] + label {
