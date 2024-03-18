@@ -189,7 +189,7 @@ function CreateFlashy() {
                     <div className='editboxescontainer'>
                         {questions.map((i, v) => { return <Box key={v} question={i[0]} getValues={getValues} answer={i[1]} updateFunc={setCardValue} index={v} deleteCard={deleteCard} /> })}
                         <div className='editaddCard' onClick={addCard}>
-                            <h3 className="editaddcardbtn">+</h3>
+                            <p className="editaddcardbtn">+</p>
                         </div>
                     </div>
 
