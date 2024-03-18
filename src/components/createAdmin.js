@@ -93,21 +93,14 @@ function CreateAdmin() {
   return (
     <div className="adminBody">
       <Navbar />
-      <div className="app">
       <div className="admin-panel">
         <div className="current-admin-users">
           <h2>Current admin users</h2>
-
             {adminUsers.map((v,i) => (
-            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', position: 'relative'}}>
-              <p>{v} <button style={{position: 'absolute', right: '0' }}onClick={() => deleteAdmin(v)} aria-label="Delete">🗑️</button></p>
+            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', position: 'relative', padding: '5px'}}>
+              {v} <button style={{ justifySelf: 'flex-end' }}onClick={() => deleteAdmin(v)} aria-label="Delete">🗑️</button>
             </div>
           ))}
-            {/* <li> <button aria-label="Delete">🗑️</button></li>
-            <li>Admin User 2 <button aria-label="Delete">🗑️</button></li>
-            <li>Admin User 3 <button aria-label="Delete">🗑️</button></li> */}
-            {/* Add more list items as needed */}
-
         </div>
         <div className="create-new-admin">
           <h2>Create new admin</h2>
@@ -117,7 +110,6 @@ function CreateAdmin() {
             <input onKeyDown={handleEnter} onChange={(e)=>handlePassword (e)} type="password" id="password" name="password" />
             <button className="btnCreateAdmin" onClick={() => sendCreateAdmin()}>Create Admin</button>
         </div>
-      </div>
       </div>
     </div>
   );
