@@ -17,9 +17,17 @@
     background-color: #BEE3DB;
     position: relative;
 
-    height: 200px;
+
+    height: 270px;
     border-radius: 20px;
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.box > .question, .box > .answer {
+    width: 49%;
 }
 
 .box::after {
@@ -35,8 +43,10 @@
 .question, .answer, .h1Q, .h1A {
     position: relative;
     height: 80%;
+    padding: 20px;
+  
+    
 
-    margin: auto;
 }
 
 .editHeader{
@@ -61,7 +71,7 @@ textarea {
     z-index: 100;
     position: absolute;
     right: 15px;
-    bottom: 15px;
+    bottom: -10px;
 
     --border: 4px;
     --slant: 0.5em;
@@ -155,16 +165,16 @@ button:active {
     background-color: #BEE3DB;
     border: .5px solid;
     flex-direction: row;
-  
-   
-    
+
+
+
 }
 
 .editheadercontainer>div{
     display: flex;
     justify-content: space-evenly;
 
-    
+
     background-color: #BEE3DB;
     width: 90%;
     margin-left: 5%;
@@ -214,8 +224,8 @@ border-radius: 10px;
 border: .5px solid;
 }
 .editboxescontainer div textarea {
-    width: 100%;
-    height: 100%;
+    width: calc(100% - 20px);
+    height: 180px;
     border: none;
     outline: none;
     resize: none;
@@ -355,7 +365,7 @@ input:checked + .slider:before {
 
 .editheadercontainer {
     text-align: center;
-    
+
 
 }
 
@@ -388,7 +398,7 @@ input:checked + .slider:before {
 
 .edit_chosentag > .edit_removetagicon:hover {
     cursor: pointer;
-   
+
 }
 
 
@@ -408,4 +418,53 @@ input:checked + .slider:before {
 .edit_searchtag_container > div {
     width: 80%;
 
+}
+
+
+.edit_boximagecontainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.edit_boximagecontainer > .edit_boximageicon {
+    margin-right: 10px;
+    height: fit-content;
+    width: fit-content;
+    align-self: center;
+    position: relative;
+    
+}
+
+
+
+.edit_boximageicon:hover {
+    cursor: pointer;
+  
+}
+
+.edit_boximagepopup {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: -50px;
+    width: 200px;
+    height: 200px;
+
+}
+
+.edit_boximagepopup > img {
+    width: 100%;
+    height: 100%;
+}
+
+.edit_removefilebtn {
+    min-width: 100px;
+
+}
+
+input[type="file"] + label {
+    display: none;
 }

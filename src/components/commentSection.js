@@ -89,7 +89,7 @@ function CommentSection() {
                             <a href={"/publicprofile?u="+comment.username}>
                                 {comment.username}
                             </a>
-                            {comment.username == localStorage.getItem("flashyUserName") ?
+                            {comment.username == localStorage.getItem("flashyUserName") || localStorage.getItem("flashyIsAdmin") == "1" ?
                                 <button className="btnDeleteComment" onClick={(e) => {deleteComment(comment.uuid);}}>
                                     ❌
                                 </button> : ""
