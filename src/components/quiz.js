@@ -279,7 +279,7 @@ function Quiz() {
 
   const buttonStyle = {
     color: "#FAF9F9",
-    backgroundColor: "#555B6E",
+    backgroundColor: "transparent",
     fontSize: "20px",
     fontFamily: "Lucida Sans",
     cursor: "pointer",
@@ -289,7 +289,7 @@ function Quiz() {
     padding: 0,
     border: "#FAF9F9",
     fontSize: "30px",
-    background: "#555B6E",
+    background: "transparent",
     cursor: "pointer",
   };
 
@@ -368,21 +368,15 @@ function Quiz() {
               <FcLike cursor={"pointer"} size={30}   onClick={() => likeDeck()} />
             </div>
   
-    
             <button style={buttonEmojiStyle} onClick={() => shuffleDeck()}>
               🔃
             </button>
         
-          
             <div className={!isFavorite ? "outline-iconstar" : ""}>
             <FaStar cursor={"pointer"}  size={30} color={isFavorite ? "#E3C565" : "gray"}   onClick={() => favoriteDeck()} />
-          </div>
-    
-
- 
+            </div>
 
             <button disabled={loadingDelete} style={buttonEmojiStyle} onClick={() => nextCard()}>➡️</button>
-
 
             <button disabled={loadingDelete} style={buttonEmojiStyle} onClick={() => endOfDeck()}>⏭️</button>
         </div>

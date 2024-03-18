@@ -244,10 +244,10 @@ function Edit() {
         <div className='editcontainer'>
             <Navbar />
             <div className='editmaincontainer'>
-                <p>Edit Flashcard - <span style={{ fontWeight: "bold" }}>{initialDeck.name}</span></p>
-                <span>Made by: {initialDeck.username}</span>
+                <h1>Edit Flashcard - <span style={{ fontWeight: "bold" }}>{initialDeck.name}</span></h1>
+                <span><h3>Made by: {initialDeck.username}</h3></span>
                 <div className='editsectioncontainer'>
-                    <p>Information</p>
+                    <h2>Information</h2>
                     <div className='editheadercontainer'>
                         <div>
                             <div>
@@ -290,6 +290,19 @@ function Edit() {
                         <div className='edit_searchtag_container'>
                             <TagSearch onaddtag={handleaddtag} />
                         </div>
+                    </div>
+                    <div className='edit_searchtag_container'>
+                        <TagSearch onaddtag={handleaddtag} />
+                    </div>
+                </div>
+            </div>
+
+            <div className='editsectioncontainer'>
+                <p>Flashcards</p>
+                <div className='editboxescontainer'>
+                    {questions.map((i, v) => { return <Box key={v} question={i[0]} getValues={getValues} answer={i[1]} updateFunc={setCardValue} index={v} deleteCard={deleteCard} /> })}
+                    <div className='editaddCard' onClick={addCard}>
+                        <p className="editaddcardbtn">+</p>
                     </div>
                 </div>
 
