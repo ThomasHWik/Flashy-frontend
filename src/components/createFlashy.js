@@ -240,8 +240,9 @@ const Box = (props) => {
     useEffect(() => {
         setQuestion(props.question || '');
         setAnswer(props.answer || '');
-        setUploadedQFile(null);
-        setUploadedAFile(null);
+        setUploadedQFile(uploadedQFile || null);
+        setUploadedAFile(uploadedAFile || null);
+        
     }, [props.question, props.answer]);
 
 
